@@ -39,10 +39,8 @@ class App
 
     }
     function url_process(){
-        if(isset($_GET['url'])){
-            // Xử lý controllers
-            $arr = explode('/',filter_var(str_replace(' ','',$_GET['url'])));
-            return $arr;
+        if( isset($_GET["url"]) ){
+            return explode("/", filter_var(trim($_GET["url"], "/")));
         }
     }
 }

@@ -2,10 +2,15 @@
 
 class Home extends controller
 {
+    public $model_teaching_history;
+    public function __construct(){
+        $this->model_teaching_history = $this->model('M_teaching_history');
+        //$teaching_recording = new M_teaching_history();
+    }
     function trang_chu(){
         // Gọi model Teaching recording
-        $data_teaching = $this->model('M_teaching_history');
-        $teaching_recording = new M_teaching_history();
+        //$data_teaching = $this->model('M_teaching_history');
+        
   
         $today_tuition = $teaching_recording->get_revenue_of_the_date(strtotime('today'));
         $tuition_yesterday = $teaching_recording->get_revenue_of_the_date(strtotime('yesterday'));
