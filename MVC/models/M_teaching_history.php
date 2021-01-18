@@ -1,16 +1,15 @@
 <?php
-require 'M_database.php';
+
 /**
  * Teaching history controller
  */
-class M_teaching_history extends DB_driver
+class M_teaching_history extends DB
 {	
 	function __construct()
 	{
 		$this->table = 'teaching_recording';
 		$this->key_id = 'id';
 	}
-
 	function get_full_teaching_recording() {
 		return parent::get_list();
 	}
@@ -95,11 +94,9 @@ class M_teaching_history extends DB_driver
 		}
 		return $tong_doanh_thu;
 	}
+	
 }
 
-//$test = new teaching_recording();
-//$abc = $test->get_list_of_the_date_range($start_date,$end_date);
-//echo $test->get_revenue_date_range($start_date,$end_date);
-//var_dump($abc);
+
 
  ?>

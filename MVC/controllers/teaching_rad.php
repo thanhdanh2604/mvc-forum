@@ -8,7 +8,9 @@ class teaching_rad extends controller
             "page"=>'teaching_rad'
             ]);
     }
-   
+    function inser (){
+
+    }
   
 }
 
