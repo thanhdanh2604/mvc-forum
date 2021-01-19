@@ -2,14 +2,15 @@
 //require_once './MVC/bridge.php';
 class App
 {
+    // Gọi Controller và action mặc định
     protected $controller= 'Home';
     protected $action='trang_chu';
     protected $pagram=[];
 
     function __construct()
     {
-       $arr = $this->url_process();
-       if(file_exists('./MVC/controllers/'.$arr[0].'.php')){
+        $arr = $this->url_process();
+        if(file_exists('./MVC/controllers/'.$arr[0].'.php')){
             require_once './MVC/controllers/'.$arr[0].'.php';
             $this->controller = $arr[0];
         }

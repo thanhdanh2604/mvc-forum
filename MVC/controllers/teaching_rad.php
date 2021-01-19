@@ -12,8 +12,7 @@ class teaching_rad extends controller
         $this->view('master_layout',[
             "page"=>'teaching_rad'
             ]);
-        $DATA = $this->model_teaching_rd->get_detail_teaching_recording(35);
-        var_dump($DATA);
+       
     }
   
 }

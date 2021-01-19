@@ -10,7 +10,7 @@ class DB
     protected $server = 'localhost';
     protected $username = 'root';
     protected $password = '';
-    protected $database = 'intertue_qlhv';
+    protected $database = 'intertu_qlhv';
     // Hàm Kết Nối
     function connect_db()
     {
