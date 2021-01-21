@@ -3,6 +3,7 @@
 class Home extends controller
 {
     public $model_teaching_history;
+    
     public function __construct(){
         $this->model_teaching_history = $this->model('M_teaching_history');
         //$teaching_recording = new M_teaching_history();

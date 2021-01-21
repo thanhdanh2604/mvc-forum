@@ -1,7 +1,7 @@
 
     <!-- jquery
 		============================================ -->
-        <script src="public/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="public/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src="public/js/bootstrap.min.js"></script>
@@ -45,3 +45,11 @@
     <!-- main JS
 		============================================ -->
     <script src="public/js/main.js"></script>
+
+    <script src="public/js/editable/jquery.mockjax.js"></script>
+    <script src="public/js/editable/mock-active.js"></script>
+    <script src="public/js/editable/select2.js"></script>
+    <script src="public/js/editable/moment.min.js"></script>
+    <script src="public/js/editable/bootstrap-datetimepicker.js"></script>
+    <script src="public/js/editable/bootstrap-editable.js"></script>
+    <script src="public/js/editable/xediable-active.js"></script>

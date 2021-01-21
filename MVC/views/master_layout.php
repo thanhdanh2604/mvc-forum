@@ -2,9 +2,10 @@
 <html class="no-js" lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>C3 | Kiaalap - Kiaalap Admin Template</title>
+    <title>BI - Intertu Education</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -65,6 +66,11 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="public/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <link rel="stylesheet" href="public/css/editor/select2.css">
+    <link rel="stylesheet" href="public/css/editor/datetimepicker.css">
+    <link rel="stylesheet" href="public/css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="public/css/editor/x-editor-style.css">
 </head>
 
 <body>
@@ -72,7 +78,7 @@
     <!-- Start Left menu area -->
   <?php require_once 'block/left_sidebar.php'; ?>
   <!-- End Left menu area -->
-
+ <?php  require_once 'block/header_bar.php'; ?>
   <div class="all-content-wrapper">
       <?php
       // require page muốn hiển thị trong thư mục /page/, ví dụ là trang bản tin, hay trang tổng hợp teaching history của R&d

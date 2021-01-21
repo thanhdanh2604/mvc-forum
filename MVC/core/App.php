@@ -6,7 +6,7 @@ class App
     protected $controller= 'Home';
     protected $action='trang_chu';
     protected $pagram=[];
-
+   
     function __construct()
     {
         $arr = $this->url_process();
@@ -41,7 +41,9 @@ class App
     }
     function url_process(){
         if( isset($_GET["url"]) ){
+            
             return explode("/", filter_var(trim($_GET["url"], "/")));
+            
         }
     }
 }
