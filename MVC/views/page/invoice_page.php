@@ -1,7 +1,16 @@
 <?php ?>
 <div class="container white-box">
+    <div class="nav-month"> 
+    
+    <span class="glyphicon glyphicon-menu-left	" aria-hidden="true"></span>
+    <?php echo date('F Y',strtotime(date('F Y',$data['month']).'- 1 month'));  ?>
+    <?php echo date('F Y',$data['month']);  ?>
+    <?php echo date('F Y',strtotime(date('F Y',$data['month']).'+ 1 month'));  ?>
+    <span class="glyphicon glyphicon-menu-right	" aria-hidden="true"></span>
+    </div>
     
     <a style="float:right" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add new</a>
+
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -53,7 +62,7 @@
             </div>
         </div>
     </div>
-
+  
     <table id="table-class" class="table table-hover">
         <thead>
             <tr>
@@ -83,28 +92,28 @@
                 <a href="#" data-name="info" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['info']; ?></a>
                 </td>
                 <td>
-                <a href="#" data-name="bill" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['bill']; ?></a>
+                <a href="#" data-name="bill" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['bill']; ?> </a> VNĐ
                 </td>
-                <td><a href="#" data-name="vat" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['vat']; ?></a></td>
+                <td><a href="#" data-name="vat" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['vat']; ?></a> VNĐ</td>
                 <td>
-                 <button onclick="ajax_delete_invoice(<?php echo $value['id'] ?>)" data-pk="<?php echo $value['id'] ?>" type="button" class="delete_record btn btn-danger">Delete</button>
+                 <button onclick="delete_invoice(<?php echo $value['id'] ?>)" type="button" class="delete_record btn btn-danger">Delete</button>
                 </td>
                 </tr>
             <?php $stt++; }} ?>
         </tbody>
     </table>
-    <script type="text/javascript" language="javascript">
-           function ajax_delete_invoice(id) {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("row_"+id).style.display = "none";
-                    }
-                };
-                xhttp.open("POST", "./ajax/ajax_edit_invoice/", true);
-                xhttp.send("id="+id);
-                }
-   </script>
 
+    <script type="text/javascript" language="javascript">
+        function delete_invoice(id) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("row_"+id).style.display = "none";
+                }
+            };
+            xhttp.open("GET", "./ajax/ajax_delete_invoice/"+id, true);
+            xhttp.send();
+            }
+   </script>
 </div>
  

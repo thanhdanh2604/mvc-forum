@@ -30,7 +30,7 @@ class M_invoice extends DB
        
     }
     function delete_invoice($id){
-        $this->remove($id);
+        return $this->remove($id);
     }
 }
 

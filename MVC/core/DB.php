@@ -76,9 +76,8 @@ class DB
     function remove($id){
           // Kết nối
         $this->connect_db();
-    
         // Delete
-        $sql = "DELETE FROM".$this->table."WHERE".$this->key_id.'='.$id;
+        $sql = "DELETE FROM ".$this->table." WHERE ".$this->key_id.'='.$id;
         return mysqli_query($this->__conn, $sql);
     }
      

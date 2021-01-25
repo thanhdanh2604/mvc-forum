@@ -9,13 +9,14 @@ class invoice extends controller {
        
     }
     // chạy hàm mặc định
-    public function trang_chu(){
+    public function trang_chu($month){
         $data = $this->model_invoice->get_all_invoice();
+        //$month = strtotime('this month');
         $this->view('master_layout',[
             "page"=>'invoice_page',
+            "month" => $month,
             "data"=>$data
             ]);
-           
     }
     public function add_invoice(){
         

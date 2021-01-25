@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="index.html">
+                        <a href="./invoice">
                                 <span class="educate-icon educate-chart icon-wrap"></span>
                                 <span class="mini-click-non">Invoice</span>
                         </a>

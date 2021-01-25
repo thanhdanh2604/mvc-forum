@@ -1,6 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="en">
+<?php
+  $public_folder = 'http://localhost/mvc-summary/public/';
 
+?>
 <head>
 
     <meta charset="utf-8">
@@ -16,61 +19,61 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/bootstrap.min.css">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/font-awesome.min.css">
     <!-- owl.carousel CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/owl.carousel.css">
-    <link rel="stylesheet" href="public/css/owl.theme.css">
-    <link rel="stylesheet" href="public/css/owl.transitions.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/owl.carousel.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/owl.theme.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/owl.transitions.css">
     <!-- animate CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/animate.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/animate.css">
     <!-- normalize CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/normalize.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/normalize.css">
     <!-- meanmenu icon CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/meanmenu.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/meanmenu.min.css">
     <!-- main CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/main.css">
     <!-- educate icon CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/educate-custon-icon.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/educate-custon-icon.css">
     <!-- morrisjs CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/morrisjs/morris.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/morrisjs/morris.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- metisMenu CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/metisMenu/metisMenu.min.css">
-    <link rel="stylesheet" href="public/css/metisMenu/metisMenu-vertical.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/metisMenu/metisMenu-vertical.css">
     <!-- calendar CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/calendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="public/css/calendar/fullcalendar.print.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/calendar/fullcalendar.print.min.css">
     <!-- Chart CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/c3/c3.min.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/c3/c3.min.css">
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/style.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>style.css">
     <!-- responsive CSS
 		============================================ -->
-    <link rel="stylesheet" href="public/css/responsive.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/responsive.css">
     <!-- modernizr JS
 		============================================ -->
-    <script src="public/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="<?PHP ECHO $public_folder ?>js/vendor/modernizr-2.8.3.min.js"></script>
 
-    <link rel="stylesheet" href="public/css/editor/select2.css">
-    <link rel="stylesheet" href="public/css/editor/datetimepicker.css">
-    <link rel="stylesheet" href="public/css/editor/bootstrap-editable.css">
-    <link rel="stylesheet" href="public/css/editor/x-editor-style.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/editor/select2.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/editor/datetimepicker.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="<?PHP ECHO $public_folder ?>css/editor/x-editor-style.css">
 </head>
 
 <body>
