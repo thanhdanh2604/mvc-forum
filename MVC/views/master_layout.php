@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <?php
   $public_folder = 'http://localhost/mvc-summary/public/';
-
+  $domain_name = 'http://localhost/mvc-summary/';
 ?>
 <head>
 

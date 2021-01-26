@@ -2,16 +2,19 @@
 
 class invoice extends controller {
     public $model_invoice;
-
+   
     public function __construct()
     {
        $this->model_invoice = $this->model('M_invoice');
-       
+      
     }
+  
     // chạy hàm mặc định
-    public function trang_chu($month){
+    public function trang_chu($month=null){
+        if($month==null){
+            $month = strtotime('this month');
+        }
         $data = $this->model_invoice->get_all_invoice();
-        //$month = strtotime('this month');
         $this->view('master_layout',[
             "page"=>'invoice_page',
             "month" => $month,
@@ -30,11 +33,8 @@ class invoice extends controller {
             );
             $this->model_invoice->insert_invoice($data);
         }
-        $data_all_invoice = $this->model_invoice->get_all_invoice();
-        $this->view('master_layout',[
-            "page"=>'invoice_page',
-            "data"=>$data_all_invoice
-        ]);
+        header('location:../invoice');
+       
     }
 }
 

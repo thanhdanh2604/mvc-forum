@@ -15,9 +15,7 @@ class ajax extends controller{
     function ajax_delete_invoice($id){
         $this->model_invoice->delete_invoice($id);
     }
-    function ajax_show_invoice_month(){
-        
-    }
+    
 }
 
 ?>

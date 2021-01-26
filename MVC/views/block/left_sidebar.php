@@ -6,20 +6,28 @@
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <div style=" margin-left:10px; width:150px" class="">
-                    <img src="public/img/logo-edu.png" alt="Logo intertu">
+                    <img src="<?php echo $public_folder ?>/img/logo-edu.png" alt="Logo intertu">
                 </div>
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a href="index.html">
+                        <a href="<?php echo $domain_name; ?>">
                                 <span class="educate-icon educate-home icon-wrap"></span>
                                 <span class="mini-click-non">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="./invoice">
-                                <span class="educate-icon educate-chart icon-wrap"></span>
+                    <?php  ?>
+                        <a href="<?php echo $domain_name ?>invoice">
+                                <span class="educate-icon educate-charts icon-wrap"></span>
                                 <span class="mini-click-non">Invoice</span>
+                        </a>
+                    </li>
+                    <li>
+                    <?php  ?>
+                        <a href="<?php echo $domain_name ?>invoice">
+                                <span class="educate-icon educate-student icon-wrap"></span>
+                                <span class="mini-click-non"> R & D Summary</span>
                         </a>
                     </li>
                 </ul>
