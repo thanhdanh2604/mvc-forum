@@ -17,15 +17,13 @@
                         </a>
                     </li>
                     <li>
-                    <?php  ?>
                         <a href="<?php echo $domain_name ?>invoice">
                                 <span class="educate-icon educate-charts icon-wrap"></span>
                                 <span class="mini-click-non">Invoice</span>
                         </a>
                     </li>
                     <li>
-                    <?php  ?>
-                        <a href="<?php echo $domain_name ?>invoice">
+                        <a href="<?php echo $domain_name ?>teaching_rad">
                                 <span class="educate-icon educate-student icon-wrap"></span>
                                 <span class="mini-click-non"> R & D Summary</span>
                         </a>

@@ -4,11 +4,13 @@
  * Teaching history controller
  */
 class M_teaching_history extends DB
-{	
+{	public $teacher;
 	function __construct()
 	{
 		$this->table = 'teaching_recording';
 		$this->key_id = 'id';
+		// Gọi Modal teacher
+		$this->teacher = new M_teacher();
 	}
 	function get_full_teaching_recording() {
 		return parent::get_list();
@@ -94,7 +96,81 @@ class M_teaching_history extends DB
 		}
 		return $tong_doanh_thu;
 	}
-	
+	function get_summary_team_rad($start_date,$end_date){
+		$data = $this->get_full_teaching_recording();
+		$array_mon = array();
+		$array_tue =array();
+		$array_web =array();
+		$array_thu =array();
+		$array_fri =array();
+		$array_sat =array();
+		$array_sun =array();
+		foreach ($data as $key ) {
+			if ($key['teaching_history']!="") {
+				$data1 = json_decode($key['teaching_history']);
+				foreach ($data1 as $key1 => $value1) {
+					if($this->teacher->is_r_a_d($value1->ma_giao_vien)){
+						foreach ($value1->lich_hoc_du_kien as $key2 => $value2) {
+							foreach ($value2 as $key3 => $value3) {
+								if (($key3>=strtotime($start_date))&&($key3<=strtotime($end_date)) ) {
+									switch (date('N',$key3)) {
+										case 1:
+										  $value3->time = $key3;
+										  array_push($array_mon,$value3);
+										  break;
+										case 2:
+										  $value3->time = $key3;
+										  array_push($array_tue,$value3);
+										  break;
+										case 3:
+										  $value3->time = $key3;
+										  array_push($array_web,$value3);
+										  break;
+										case 4:
+										  $value3->time = $key3;
+										  array_push($array_thu,$value3);
+										  break;
+										case 5:
+										  $value3->time = $key3;
+										  array_push($array_fri,$value3);
+										  break;
+										case 6:
+										  $value3->time = $key3;
+										  array_push($array_sat,$value3);
+										  break;
+										case 7:
+										  $value3->time = $key3;
+										  array_push($array_sun,$value3);
+										  break;
+												   
+									  default: 
+										break;
+									}
+								}
+								
+							}
+						}
+					}
+				}
+			   
+			}
+		}
+		return $details = array_merge($this->sapxeptimeline($array_mon),$this->sapxeptimeline($array_tue),$this->sapxeptimeline($array_web),$this->sapxeptimeline($array_thu),$this->sapxeptimeline($array_fri),$this->sapxeptimeline($array_sat),$this->sapxeptimeline($array_sun));
+	}
+	function sapxeptimeline($array){
+		$n = count($array);
+		for ($i=0; $i < $n-1; $i++) { 
+		  for ($j=$i+1; $j < $n; $j++) { 
+		  
+			if(strtotime($array[$i]->starttime)>strtotime($array[$j]->starttime)){
+			  $temp=$array[$i];
+			  $array[$i] =  $array[$j];
+			  $array[$j] = $temp;
+			 }
+		  }
+		}
+		return $array;
+	  } 
 }
 
 
