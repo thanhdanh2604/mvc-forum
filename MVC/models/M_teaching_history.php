@@ -4,13 +4,14 @@
  * Teaching history controller
  */
 class M_teaching_history extends DB
-{	public $teacher;
+{	
+	public $teacher;
 	function __construct()
 	{
 		$this->table = 'teaching_recording';
 		$this->key_id = 'id';
 		// Gọi Modal teacher
-		$this->teacher = new M_teacher();
+		
 	}
 	function get_full_teaching_recording() {
 		return parent::get_list();
@@ -97,6 +98,7 @@ class M_teaching_history extends DB
 		return $tong_doanh_thu;
 	}
 	function get_summary_team_rad($start_date,$end_date){
+		$this->teacher = new M_teacher();
 		$data = $this->get_full_teaching_recording();
 		$array_mon = array();
 		$array_tue =array();

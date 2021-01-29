@@ -6,24 +6,24 @@
         </div>
         <div class="left-custom-menu-adp-wrap comment-scrollbar">
             <div style=" margin-left:10px; width:150px" class="">
-                    <img src="<?php echo $public_folder ?>/img/logo-edu.png" alt="Logo intertu">
+                    <img src="<?php  echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/img/logo-edu.png" alt="Logo intertu">
                 </div>
             <nav class="sidebar-nav left-sidebar-menu-pro">
                 <ul class="metismenu" id="menu1">
                     <li>
-                        <a href="<?php echo $domain_name; ?>">
+                        <a href="<?php echo $GLOBALS['DEFAUL_DOMAIN']; ?>">
                                 <span class="educate-icon educate-home icon-wrap"></span>
                                 <span class="mini-click-non">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo $domain_name ?>invoice">
+                        <a href="<?php  echo $GLOBALS['DEFAUL_DOMAIN']; ?>invoice">
                                 <span class="educate-icon educate-charts icon-wrap"></span>
                                 <span class="mini-click-non">Invoice</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo $domain_name ?>teaching_rad">
+                        <a href="<?php  echo $GLOBALS['DEFAUL_DOMAIN']; ?>teaching_rad">
                                 <span class="educate-icon educate-student icon-wrap"></span>
                                 <span class="mini-click-non"> R & D Summary</span>
                         </a>

@@ -24,7 +24,12 @@ class M_teacher extends DB
         }
     }
     function get_rd_teacher(){
-        return $this->get_list_with_condition('rd_team',1);
+        $data =  $this->get_list_with_condition('rd_team',1);
+        $array = array();
+        foreach ($data as  $value) {
+            array_push($array,['id'=>$value['id_teacher'],'name'=>$value['fullname']]);
+        }
+        return $array;
     }
     function get_name_teacher($id){
        $data= $this->get_row($id);

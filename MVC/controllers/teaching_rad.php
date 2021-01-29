@@ -17,9 +17,10 @@ class teaching_rad extends controller
             $end_date = date('Y-m-t',strtotime('this month'));
         }
         $array_student = $this->student->get_id_and_name_student();
-        $array_teacher_rad = $this->teacher->get_id_and_name_teacher();
+        $array_teacher_rad = $this->teacher->get_rd_teacher();
         $array_summary = $this->teaching_recording->get_summary_team_rad($start_date,$end_date);
         $subject_name = $this->subject->get_all_subject();
+        
         $this->view('master_layout',[ 
         "page"=>'teaching_rad',
         "rad"=> $array_summary,

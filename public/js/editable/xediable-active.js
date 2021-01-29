@@ -4,18 +4,18 @@
  //defaults
    $.fn.editable.defaults.url = '/post'; 
 
-
+    
     $('.edit_invoice_colum').editable({
-        url: './ajax/ajax_edit_invoice/',
+        url: './ajax/ajax_edit_invoice/'
     });
 
     $('.edit_date').editable({
         type: 'date',
         url: './ajax/ajax_edit_invoice/',
-        title: 'Edit time',
-       
-        
+        title: 'Edit time'
     });  
- 
+    $('.edit_staff_cost').editable({
+        url: './ajax/ajax_edit_staff_cost/'
+    });
    
 })(jQuery); 
