@@ -24,12 +24,12 @@ class invoice extends controller {
             ]);
     }
     public function add_staff_cost(){
-        
+        $month = date('Y-m-01',strtotime($_POST['month']));
         if(isset($_POST['submit_add_staff_cost'])){
                 $data = array(
-                    'month'=>$_POST['month'],
+                    'month'=>$month,
                     'note'=>$_POST['note'], 
-                    'total'=> $_POST['total']
+                    'cost'=> $_POST['cost']
                 );
                 $this->model_staff_cost->insert_staff_cost($data);
         }
@@ -52,6 +52,7 @@ class invoice extends controller {
         }
         header('location:../invoice');
     }
+   
 }
 
 ?>

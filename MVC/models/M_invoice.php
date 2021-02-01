@@ -10,9 +10,9 @@ class M_invoice extends DB
     function insert_invoice($data){
         if($this->insert($data)){
             $this->status = true;
+          
         }
     }
-     
     function get_all_invoice(){
         if($this->get_list()){
             $this->status = true;

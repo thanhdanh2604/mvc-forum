@@ -1,6 +1,8 @@
 (function ($) {
  "use strict";
-
+ var array_dt = ['Chi phí doanh thu', 30, 200, 100, 400, 150, 250];
+ var array_vp = ['Chi phí văn phòng', 30, 200, 100, 400, 150, 250];
+ var array_ns = ['Chi phí nhân sự', 30, 200, 100, 400, 150, 250];
 
             c3.generate({
                 bindto: '#chart_dt',
@@ -8,7 +10,7 @@
                    x: 'x',
                     columns: [
                         ['x', 1,2,3,4,5,6,7,8,9,10,12],
-                        ['Chi phí doanh thu', 30, 200, 100, 400, 150, 250]
+                        array_dt
                     ],
                     colors:{
                        ' Chi phí doanh thu': '#006DF0',
@@ -23,7 +25,7 @@
                     x: 'x',
                     columns: [
                         ['x', 1,2,3,4,5,6,7,8,9,10,12],
-                        ['Chi phí văn phòng', 30, 200, 100, 400, 150, 250]
+                        array_vp
                     ],
                     colors:{
                         'Chi phí văn phòng': '#47ac47',
@@ -37,7 +39,7 @@
                     x: 'x',
                     columns: [
                         ['x', 1,2,3,4,5,6,7,8,9,10,12],
-                        ['Chi phí nhân sự', 30, 200, 100, 400, 150, 250]
+                        array_ns
                     ],
                     colors:{
                         'Chi phí nhân sự': '#e80b92',

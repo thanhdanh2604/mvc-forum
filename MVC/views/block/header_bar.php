@@ -5,13 +5,11 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="header-top-wraper">
                                 <div class="row">
-                                   
+                                    <div style="height:60px;background-color:blue"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-         
-           
-        </div>
+ </div>

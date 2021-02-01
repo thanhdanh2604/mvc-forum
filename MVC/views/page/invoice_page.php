@@ -38,7 +38,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div style="margin-top:30px" role="tabpanel" class="tab-pane active" id="Invoice">
-                                <form action="<?php echo $domain_name; ?>/invoice/add_invoice" method="POST" role="form">
+                                <form action="<?php echo $GLOBALS['DEFAUL_DOMAIN']?>invoice/add_invoice" method="POST" role="form">
                                  
                                     <div class="form-group">
                                         <label for="">Mã hóa đơn</label>
@@ -74,7 +74,7 @@
                                 </form>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="hr-ns">
-                                <form action="<?php echo $domain_name; ?>/invoice/add_staff_cost" method="POST" role="form">
+                                <form action="<?php echo $GLOBALS['DEFAUL_DOMAIN']?>invoice/add_staff_cost" method="POST" role="form">
                                     <div class="form-group">
                                         <label for="">Tháng</label>
                                         <input type="month" class="form-control" name="month" id="">
@@ -174,6 +174,7 @@
          </thead>
          <tbody>
              <?php  if(isset($data['data_sc'])){
+                 $tong_sc = 0;
                  $stt_sc = 1;
                  foreach ($data['data_sc'] as $value) { 
                     if(date('m-Y',strtotime($value['month']))===date('m-Y',$data['month'])){ ?>
@@ -184,7 +185,13 @@
                         <td>  <a href="#"  class="edit_staff_cost" data-name="note" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"><?php echo $value['note'] ?></a></td>
                         <td>    <button onclick="delete_staff_cost(<?php echo $value['id'] ?>)" type="button" class="delete_record btn btn-danger">Delete</button></td>
                     </tr>
-             <?php } } $stt_sc++; } ?>
+             <?php
+             $tong_sc+=$value['cost'];
+             } $stt_sc++; }  } ?>
+             <tr style="font-weight:bold">
+                <td colspan="2"><b>Tổng:</b> </td>
+                <td colspan="4"> <?php echo $tong_sc;  ?> VNĐ</td>
+            </tr>
          </tbody>
      </table>
      
@@ -215,7 +222,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("row_sc_"+id).style.display = "none";
                 }
-            };delete_staff_cost
+            };
             xhttp.open("GET", "./ajax/ajax_delete_staff_cost/"+id, true);
             xhttp.send();
             }

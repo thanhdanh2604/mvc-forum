@@ -61,7 +61,8 @@ class M_teaching_history extends DB
 							continue;
 						}else{
 							if ( $key3>=$start_date && $key3<=$end_date) {
-								$value3->ma_goi = $value1->id_packet;
+								$value3->ma_goi =
+								$value1->id_packet;
 								$value3->ma_lop = $value['id'];
 								$array[] = $value2;
 							}
