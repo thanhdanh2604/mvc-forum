@@ -28,6 +28,12 @@
                                 <span class="mini-click-non"> R & D Summary</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?php  echo $GLOBALS['DEFAUL_DOMAIN']; ?>teaching_details">
+                                <span class="educate-icon educate-data-table icon-wrap"></span>
+                                <span class="mini-click-non"> Teaching Details</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

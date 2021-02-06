@@ -32,6 +32,18 @@ class M_staff_cost extends DB
     function delete_staff_cost($id){
         return $this->remove($id);
     }
+    function get_staff_cost_date_range($start_date,$end_date){
+        //@$start_date,$end_date dạng YYYY/MM/DD
+        return $this->get_list_with_between('month',$start_date, $end_date);
+    }
+    function get_total_staff_cost($start_date,$end_date){
+       $array = $this->get_staff_cost_date_range($start_date,$end_date);
+       $tong = 0;
+       foreach ($array as  $value) {
+          $tong+= $value['cost'];
+        }
+        return $tong;
+    }
 }
 
 

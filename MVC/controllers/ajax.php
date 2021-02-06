@@ -3,6 +3,7 @@ class ajax extends controller{
     public $model_invoice;
     public $model_staff_cost;
     public $model_teaching_recording;
+  
     function __construct()
     {
         $this->model_invoice = $this->model('M_invoice');
@@ -29,21 +30,63 @@ class ajax extends controller{
     function ajax_delete_staff_cost($id){
         $this->model_staff_cost->delete_staff_cost($id);
     }
-    public function get_array_doanh_thu_trong_nam(){
+    function get_array_doanh_thu_trong_nam(){
         $array = array();
         for ($m=1; $m<=12; $m++) {
             $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
-            $start_date = strtotime(date('Y-m-01',strtotime($month)));
-            $end_date = strtotime(date('Y-m-t',strtotime($month)));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_teaching_recording->get_revenue_date_range($start_date,$end_date);
            // if($value!=0){
                 array_push($array,$value);
            // }else{ continue;}
+        }
+        echo json_encode($array);
+    }
+    function get_array_chi_phi_van_phong(){
+        $array = array();
+        for ($m=1; $m<=12; $m++) {
+            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            $value = $this->model_invoice->get_total_cost_invoice($start_date,$end_date);
+          
+                array_push($array,$value);
            
         }
         echo json_encode($array);
     }
-   
+    function get_array_chi_phi_nhan_su(){
+        $array = array();
+        for ($m=1; $m<=12; $m++) {
+            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            $value = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
+           // if($value!=0){
+                array_push($array,$value);
+           // }else{ continue;}
+        }
+        echo json_encode($array);
+    }
+    function get_array_doanh_thu_thuc_te(){
+        $array = array();
+        for ($m=1; $m<=12; $m++) {
+            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            // Lấy doanh thu, chi phí văn phòng, và chi phí nhân sự
+            $doanh_thu = $this->model_teaching_recording->get_revenue_date_range($start_date,$end_date);
+            $chi_phi_van_phong = $this->model_invoice->get_total_cost_invoice($start_date,$end_date);
+            $chi_phi_ns = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
+           
+            // trừ chi 
+            $total = $doanh_thu - ($chi_phi_van_phong + $chi_phi_ns);
+            
+            array_push($array,$total);
+        }
+        echo json_encode($array);
+    }
 }
 
 ?>

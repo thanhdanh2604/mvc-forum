@@ -9,7 +9,6 @@
             </div>
         </div>  
        
-        <!-- Small chart Start-->
         <div class="sparkline-area mg-b-15">
             <div class="container-fluid">
                 <div class="row">
@@ -39,14 +38,20 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="sparkline-list">
-                          
+                             <div class="sparkline7-hd">
+                                <div class="main-spark7-hd">
+                                    <h1>Thống kê <span class="c3-ds-n">Doanh thu mỗi tháng (Đã trừ chi phí)</span></h1>
+                                </div>
+                            </div>
+                            <div class="sparkline7-graph">
+                                <div id="chart_dt_goc"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Small chart end-->
-        <!-- custom chart start-->
+     
         <div class="pie-bar-line-area mg-tb-30">
             <div class="container-fluid">
                 <div class="row">
@@ -54,7 +59,7 @@
                         <div class="sparkline7-list responsive-mg-b-30">
                             <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1>Thống kê <span class="c3-ds-n">Doanh thu</span></h1>
+                                    <h1>Thống kê <span class="c3-ds-n">Doanh thu thuần</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -100,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="sparkline8-graph">
-                                    <div id="chart_tong_hop">
+                                    <div id="chart_tong_hop_1">
                                     </div>
                                 </div>
                         </div>
@@ -108,8 +113,7 @@
                 </div>
             </div>
         </div>
-        
-        <!-- custom chart end-->
+       
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">

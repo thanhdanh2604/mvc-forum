@@ -13,14 +13,12 @@
                      
                       document.getElementById('totalhours_'+id_teacher).innerHTML = temp;
                       document.getElementById('othours_'+id_teacher).innerHTML = tempot;
-                    
                   }
           </script>
      
         <div class="container-fluid">
         
         <div class="row">
-          
           <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
             <div class="white-box">
               <table id="table-class" class="table table-hover table-striped table-bordered">
@@ -206,8 +204,6 @@
                     
                     <button onclick="choose_date()" id="confirm_button" class="btn btn-primary">Xem</button>
                   </form>
-                  
-             
           </div>
          
        <script> 
@@ -216,7 +212,7 @@
           var  start =  document.getElementById('start_date').value;
           var  end = document.getElementById('end_date').value;
           var  total = start+'/'+end+'/';
-          window.open("<?php echo $domain_name ?>teaching_rad/trang_chu/"+total);
+          window.open("<?php echo $GLOBALS['DEFAUL_DOMAIN'] ?>teaching_rad/trang_chu/"+total);
         }
         
        </script>

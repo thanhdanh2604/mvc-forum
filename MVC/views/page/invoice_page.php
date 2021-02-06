@@ -1,5 +1,5 @@
 
-<div class="container white-box">
+<div class=" white-box">
     <div class="nav-month"> 
         <div>
             <a href= "<?php echo $GLOBALS['DEFAUL_DOMAIN']?>invoice/trang_chu/<?php echo strtotime(date('F Y',$data['month']).'- 1 month'); ?>" class="glyphicon glyphicon-menu-left	" aria-hidden="true"></a>
@@ -12,7 +12,7 @@
             <a href="<?php echo $GLOBALS['DEFAUL_DOMAIN']?>invoice/trang_chu/<?php echo strtotime(date('F Y',$data['month']).'+ 1 month'); ?>" class="glyphicon glyphicon-menu-right	" aria-hidden="true"></a>
          </div>
     </div>
-    <div>
+    <div style="display:flex;justify-content:flex-end">
         <a style="float:right" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add new</a>
     </div>
     <div class="modal fade" id="myModal">
@@ -101,99 +101,108 @@
         </div>
     </div>
   
-    <table id="table-class" class="table table-hover">
-        <caption> Hóa đơn</caption>
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Mã hóa đơn</th>
-                <th>Ngày</th>
-                <th>Nội dung</th>
-                <th>VAT</th>
-                <th>Số tiền</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $stt=1;
-            $tong_VAT = 0;
-            $tong_bill = 0;
-            if(isset($data['data'])){
-                 foreach ($data['data']  as $key => $value) {
-                if(date('m-Y',strtotime($value['date']))===date('m-Y',$data['month'])){ ?>
-                    <tr id="row_<?php echo $value['id'] ?>">
-                        <td><?php echo $stt; ?></td>
-                        <td>
-                            <a href="#" data-name="code_bill" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới">
-                                <?php echo $value['code_bill']; ?>
-                            </a>
-                        </td>
-                        <td>
-                             <a href="#" class="edit_date" data-name="date" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"><?php echo date('d-m-Y',strtotime($value['date']))?></a>
-                        </td>
-                        <td>
-                            <a href="#" data-name="info" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['info']; ?></a>
-                        </td>
-                        <td>
-                            <a href="#" data-name="vat" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum vat_value"  data-title="Nhập giá trị mới"><?php echo $value['vat']; ?></a> VNĐ
-                        </td>
+  <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <table id="table-class" class="table table-hover">
+        <caption><h3>Hóa đơn</h3> </caption>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã hóa đơn</th>
+                    <th>Ngày</th>
+                    <th>Nội dung</th>
+                    <th>VAT</th>
+                    <th>Số tiền</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $stt=1;
+                $tong_VAT = 0;
+                $tong_bill = 0;
+                if(isset($data['data'])){
+                    foreach ($data['data']  as $key => $value) {
+                    if(date('m-Y',strtotime($value['date']))===date('m-Y',$data['month'])){ ?>
+                        <tr id="row_<?php echo $value['id'] ?>">
+                            <td><?php echo $stt; ?></td>
+                            <td>
+                                <a href="#" data-name="code_bill" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới">
+                                    <?php echo $value['code_bill']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="edit_date" data-name="date" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"><?php echo date('d-m-Y',strtotime($value['date']))?></a>
+                            </td>
+                            <td>
+                                <a href="#" data-name="info" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum"  data-title="Nhập giá trị mới"><?php echo $value['info']; ?></a>
+                            </td>
+                            <td>
+                                <a href="#" data-name="vat" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum vat_value"  data-title="Nhập giá trị mới"><?php echo $value['vat']; ?></a> VNĐ
+                            </td>
 
-                        <td>
-                            <a href="#" data-name="bill" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum bill_value"  data-title="Nhập giá trị mới"><?php echo $value['bill']; ?> </a> VNĐ
-                        </td>
-                        
-                        <td>
-                            <button onclick="delete_invoice(<?php echo $value['id'] ?>)" type="button" class="delete_record btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-              <?php
-              $tong_VAT+=$value['vat'];
-              $tong_bill +=$value['bill'];
-              $stt++; 
-                } ?>
-            <?php   } }  ?>
-            <tr style="font-weight:bold">
-                <td colspan="4"><b>Tổng:</b> </td>
-                <td> <?php echo $tong_VAT; ?> VNĐ</td>
-                <td colspan="2"> <?php echo $tong_bill; ?> VNĐ</td>
-            </tr>
-        </tbody>
+                            <td>
+                                <a href="#" data-name="bill" data-pk="<?php echo $value['id'] ?>" class="edit_invoice_colum bill_value"  data-title="Nhập giá trị mới"><?php echo $value['bill']; ?> </a> VNĐ
+                            </td>
+                            
+                            <td>
+                                <button onclick="delete_invoice(<?php echo $value['id'] ?>)" type="button" class="delete_record btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                <?php
+                $tong_VAT+=$value['vat'];
+                $tong_bill +=$value['bill'];
+                $stt++; 
+                    } ?>
+                <?php   } }  ?>
+                <tr class="info" style="font-weight:bold">
+                    <td colspan="4"><b>Tổng:</b> </td>
+                    <td> <?php echo $tong_VAT; ?> VNĐ</td>
+                    <td colspan="2"> <?php echo $tong_bill; ?> VNĐ</td>
+                </tr>
+            </tbody>
     </table>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <table class="table table-hover" >
+            <caption>Staff cost</caption>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Month</th>
+                    <th>Cost</th>
+                    <th>Note</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php  if(isset($data['data_sc'])){
+                    $tong_sc = 0;
+                    $stt_sc = 1;
+                    foreach ($data['data_sc'] as $value) { 
+                        if(date('m-Y',strtotime($value['month']))===date('m-Y',$data['month'])){ ?>
+                        <tr id="row_sc_<?php echo $value['id'] ?>">
+                            <td>  <?php echo $stt_sc ?></td>
+                            <td>  <a href="#"  class="edit_staff_cost" data-name="month" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"> <?php echo date('M-Y',strtotime($value['month'])); ?></a></td>
+                            <td>  <a href="#"  class="edit_staff_cost" data-name="cost" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"> <?php echo $value['cost'] ?></a></td>
+                            <td>  <a href="#"  class="edit_staff_cost" data-name="note" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"><?php echo $value['note'] ?></a></td>
+                            <td>    <button onclick="delete_staff_cost(<?php echo $value['id'] ?>)" type="button" class="delete_record btn btn-danger">Delete</button></td>
+                        </tr>
+                <?php
+                $tong_sc+=$value['cost'];
+                } $stt_sc++; }  } ?>
+                <tr class="success" style="font-weight:bold">
+                    <td colspan="2"><b>Tổng:</b> </td>
+                    <td colspan="4"> <?php echo $tong_sc;  ?> VNĐ</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+  </div>
+  
+   
      <hr style="margin-top:50px;margin-bottom:50px">
      
-     <table class="table table-hover" >
-         <caption>Staff cost</caption>
-         <thead>
-             <tr>
-                 <th>STT</th>
-                 <th>Month</th>
-                 <th>Cost</th>
-                 <th>Note</th>
-                 <th>Action</th>
-             </tr>
-         </thead>
-         <tbody>
-             <?php  if(isset($data['data_sc'])){
-                 $tong_sc = 0;
-                 $stt_sc = 1;
-                 foreach ($data['data_sc'] as $value) { 
-                    if(date('m-Y',strtotime($value['month']))===date('m-Y',$data['month'])){ ?>
-                    <tr id="row_sc_<?php echo $value['id'] ?>">
-                        <td>  <?php echo $stt_sc ?></td>
-                        <td>  <a href="#"  class="edit_staff_cost" data-name="month" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"> <?php echo date('M-Y',strtotime($value['month'])); ?></a></td>
-                        <td>  <a href="#"  class="edit_staff_cost" data-name="cost" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"> <?php echo $value['cost'] ?></a></td>
-                        <td>  <a href="#"  class="edit_staff_cost" data-name="note" data-pk="<?php echo $value['id'] ?>" data-title="Nhập giá trị mới"><?php echo $value['note'] ?></a></td>
-                        <td>    <button onclick="delete_staff_cost(<?php echo $value['id'] ?>)" type="button" class="delete_record btn btn-danger">Delete</button></td>
-                    </tr>
-             <?php
-             $tong_sc+=$value['cost'];
-             } $stt_sc++; }  } ?>
-             <tr style="font-weight:bold">
-                <td colspan="2"><b>Tổng:</b> </td>
-                <td colspan="4"> <?php echo $tong_sc;  ?> VNĐ</td>
-            </tr>
-         </tbody>
-     </table>
+     
      
     <style>
         .nav-month{

@@ -115,6 +115,24 @@ class DB
         mysqli_free_result($result);
         return $return;
     }
+    function get_list_with_between($colum,$start,$end){
+        $this->connect_db();
+         $sql = "SELECT * FROM ".$this->table." WHERE ".$colum." BETWEEN 
+        '".$start."' AND '".$end."'";
+       
+        $result = mysqli_query($this->__conn, $sql);
+        if (!$result){
+            die ('Câu truy vấn bị sai');
+        }
+        $return = array();
+        // Lặp qua kết quả để đưa vào mảng
+        while ($row = mysqli_fetch_assoc($result)){
+            $return[] = $row;
+        }
+        // Xóa kết quả khỏi bộ nhớ
+        mysqli_free_result($result);
+        return $return;
+    }
     // Hàm lấy 1 record dùng trong trường hợp lấy chi tiết tin
     function get_row($id){
        // Kết nối

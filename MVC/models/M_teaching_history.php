@@ -60,11 +60,12 @@ class M_teaching_history extends DB
 							//Một số trường hợp lỗi lúc đầu không có trường thời gian thì sẽ bỏ qua
 							continue;
 						}else{
-							if ( $key3>=$start_date && $key3<=$end_date) {
+							if ( $key3>=$start_date && $key3<=$end_date && isset($value3->doanh_thu)) {
 								$value3->ma_goi =
 								$value1->id_packet;
 								$value3->ma_lop = $value['id'];
 								$array[] = $value2;
+							
 							}
 						}
 					}
@@ -87,7 +88,9 @@ class M_teaching_history extends DB
 	}
 
 	function get_revenue_date_range($start_date,$end_date){
-		$array_date_range = $this->get_list_of_the_date_range($start_date,$end_date);
+		$start_date_value = strtotime($start_date);
+		$end_date_value = strtotime($end_date);
+		$array_date_range = $this->get_list_of_the_date_range($start_date_value,$end_date_value);
 		$tong_doanh_thu = 0;
 		foreach($array_date_range as $value){
 			foreach($value as $chi_tiet_buoi){
