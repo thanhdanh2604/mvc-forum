@@ -6,8 +6,8 @@ class login extends controller
     {
         
     }
-    function tran_chu(){
-
+    function trang_chu(){
+        
     }
 }
 
