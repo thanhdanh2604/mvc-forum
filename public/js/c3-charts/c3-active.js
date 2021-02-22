@@ -5,12 +5,30 @@
             var array_ns = ['Chi phí nhân sự'];
             var array_dt_tt = ['Doanh thu'];
             var final_dt;
+            c3.generate({
+                bindto :'#chart-day',
+                data: {
+                    x: 'x',
+                    columns: [
+                        ['x', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01', '2014-01-01', '2015-01-01'],
+                        ['sample', 30, 200, 100, 400, 150, 250]
+                    ]
+                },
+                axis : {
+                    x : {
+                        type : 'timeseries',
+                        tick: {
+                          //  format: function (x) { return x.getFullYear(); }
+                        }
+                    }
+                }
+            });
             $.get( "./ajax/get_array_doanh_thu_trong_nam", function( data ) {
                  final_dt =  array_dt.concat(JSON.parse(data));
                 c3.generate({
                     bindto: '#chart_dt',
                     data:{
-                       x: 'x',
+                        x: 'x',
                         columns: [
                             ['x', 1,2,3,4,5,6,7,8,9,10,11,12],
                             final_dt
@@ -21,7 +39,6 @@
                         type: 'bar'
                     }
                 });
-               
             });
             $.get( "./ajax/get_array_doanh_thu_thuc_te", function( data ) {
                var final_array_dttt =  array_dt_tt.concat(JSON.parse(data));
@@ -76,26 +93,5 @@
                     }
                 });
             });
-            
-           
-            c3.generate({
-                bindto: '#chart_tong_hop',
-                data:{
-                    x: 'x',
-                    columns: [
-                        ['x', 1,2,3,4,5,6,7,8,9,10,12],
-                        ['Chi phí doanh thu', 1200, 2002, 109, 4999, 1509, 2399],
-                        ['Chi phí văn phòng', 3022, 2022, 1999, 4099, 1999, 2999],
-                        ['Chi phí nhân sự', 3599, 2009, 1099, 4009, 1599, 2299]
-                    ],
-                    colors:{
-                        'Doanh thu': '#006DF0',
-                        'Chi phí văn phòng': '#47ac47',
-                        'Chi phí nhân sự': '#e80b92'
-                    },
-                    type: 'bar'
-                }
-            });
-            
 
 })(jQuery); 

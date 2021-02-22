@@ -20,6 +20,7 @@
                             <th>Date</th>
                             <th>Form</th>
                             <th>Hours</th>
+                            <th style="display:none">dd_student</th>
                             <th>Doanh thu thuần</th>
                             <th>Subject</th>
                          </tr>
@@ -75,7 +76,9 @@
                               }else{
                               echo 0;
                               }  ?>
-                            
+                            </td>
+                            <td style="display:none">
+                              <?php print_r($detail->dd_student); ?>
                             </td>
                             <td class="doanh_thu"><?php echo $detail->doanh_thu ?></td>
                             <td>
@@ -159,8 +162,8 @@
        tong_gio += parseInt(array_gio[j].innerHTML);
       }
       tong_dt.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-      document.getElementById("total_dt").innerHTML = tong_dt+ " VNĐ";
-      document.getElementById("total_hour").innerHTML = tong_gio + " Giờ";
+      document.getElementById("total_dt").innerHTML = Intl.NumberFormat().format(tong_dt)+ " VNĐ";
+      document.getElementById("total_hour").innerHTML = Intl.NumberFormat().format(tong_gio) + " Giờ";
     }
   
   </script>

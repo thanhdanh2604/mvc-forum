@@ -80,7 +80,7 @@ class M_teaching_history extends DB
 		$array_class_of_the_date = $this->get_list_of_the_date($date);
 		$tong_doanh_thu = 0 ;
 		foreach ($array_class_of_the_date as $value) {
-			if( isset($value->doanh_thu)){
+			if( isset($value->doanh_thu) && $value->dd_student==1){
 				$tong_doanh_thu += $value->doanh_thu;
 			}
 		}

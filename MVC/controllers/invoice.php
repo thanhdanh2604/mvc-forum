@@ -29,7 +29,7 @@ class invoice extends controller {
                 $data = array(
                     'month'=>$month,
                     'note'=>$_POST['note'], 
-                    'cost'=> $_POST['cost']
+                    'cost'=> $_POST['total']
                 );
                 $this->model_staff_cost->insert_staff_cost($data);
         }
@@ -38,17 +38,15 @@ class invoice extends controller {
     public function add_invoice(){
         
         if(isset($_POST['submit_add_invoice'])){
-            if($_POST['type']=='OE'||$_POST['type']=='SC'){
                 $data = array(
                     'code_bill'=>$_POST['ma_hoa_don'],
                     'info'=>$_POST['noi_dung'],
-                    'type'=> $_POST['type'],
                     'date'=>$_POST['date'],
                     'bill'=> $_POST['bill'],
                     'vat'=> $_POST['bill_vat']
                 );
                 $this->model_invoice->insert_invoice($data);
-            }else { die('Không đúng type'); }
+          
         }
         header('location:../invoice');
     }

@@ -156,15 +156,15 @@
                 <?php   } }  ?>
                 <tr class="info" style="font-weight:bold">
                     <td colspan="4"><b>Tổng:</b> </td>
-                    <td> <?php echo $tong_VAT; ?> VNĐ</td>
-                    <td colspan="2"> <?php echo $tong_bill; ?> VNĐ</td>
+                    <td> <?php echo number_format($tong_VAT); ?> VNĐ</td>
+                    <td colspan="2"> <?php echo number_format($tong_bill); ?> VNĐ</td>
                 </tr>
             </tbody>
     </table>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <table class="table table-hover" >
-            <caption>Staff cost</caption>
+            <caption><h3>Staff cost</h3></caption>
             <thead>
                 <tr>
                     <th>STT</th>
@@ -192,7 +192,7 @@
                 } $stt_sc++; }  } ?>
                 <tr class="success" style="font-weight:bold">
                     <td colspan="2"><b>Tổng:</b> </td>
-                    <td colspan="4"> <?php echo $tong_sc;  ?> VNĐ</td>
+                    <td colspan="4"> <?php echo number_format($tong_sc) ;  ?> VNĐ</td>
                 </tr>
             </tbody>
         </table>

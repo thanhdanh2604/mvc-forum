@@ -8,6 +8,7 @@ class M_invoice extends DB
 		$this->key_id = 'id';
     }
     function insert_invoice($data){
+        return $this->insert($data);
         if($this->insert($data)){
             $this->status = true;
         }

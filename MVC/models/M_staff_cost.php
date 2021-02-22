@@ -45,6 +45,4 @@ class M_staff_cost extends DB
         return $tong;
     }
 }
-
-
 ?>
