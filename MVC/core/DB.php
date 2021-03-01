@@ -101,7 +101,7 @@ class DB
     }
     function get_list_with_condition($colum,$codittion){
         $this->connect_db();
-         $sql = "SELECT * FROM ".$this->table." WHERE ".$colum." = ".$codittion;
+         $sql = "SELECT * FROM ".$this->table." WHERE ".$colum." = '".$codittion."'";
         $result = mysqli_query($this->__conn, $sql);
         if (!$result){
             die ('Câu truy vấn bị sai');

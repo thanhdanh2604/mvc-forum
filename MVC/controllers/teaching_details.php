@@ -19,6 +19,7 @@ class teaching_details extends controller {
             $start_date = strtotime($start_date);
             $end_date = strtotime($end_date);
         }
+      
         $array_student = $this->model_student->get_id_and_name_student();
         $array_teacher = $this->model_teacher->get_id_and_name_teacher();
         $subject_name = $this->model_subject->get_all_subject();

@@ -26,23 +26,23 @@ class M_teaching_history extends DB
 		$data = $this->get_full_teaching_recording();
 		$array = array();
 		foreach ($data as $value) {
-		$diemdanh = json_decode($value['teaching_history']);
-		foreach ($diemdanh as $value1) {
-			foreach ($value1->lich_hoc_du_kien as  $value2) {
-			foreach ($value2 as $key3 => $value3) {
-				if($key3==null){
-				continue;
-				}else{
-				if ( date('d-m-Y',$key3) === date('d-m-Y',$date)) {
-					$value3->ma_goi = $value1->id_packet;
-					$value3->ma_lop = $value['id'];
-					$array[] = $value3;
-				}
+			$diemdanh = json_decode($value['teaching_history']);
+			foreach ($diemdanh as $value1) {
+				foreach ($value1->lich_hoc_du_kien as  $value2) {
+					foreach ($value2 as $key3 => $value3) {
+						if($key3==null){
+						continue;
+						}else{
+						if ( date('d-m-Y',$key3) === date('d-m-Y',$date)) {
+							$value3->ma_goi = $value1->id_packet;
+							$value3->ma_lop = $value['id'];
+							$array[] = $value3;
+						}
+						}
+					}
+				
 				}
 			}
-			
-			}
-		}
 		}
 		return $array;
 	}
@@ -75,7 +75,7 @@ class M_teaching_history extends DB
 		return $array;
 	}
 
-	// Lấy doanh thu theo $date
+	// Lấy doanh thu theo $date, $date dạng time
 	function get_revenue_of_the_date($date){
 		$array_class_of_the_date = $this->get_list_of_the_date($date);
 		$tong_doanh_thu = 0 ;
@@ -86,7 +86,17 @@ class M_teaching_history extends DB
 		}
 		return $tong_doanh_thu;
 	}
-
+	function get_revenue_last_7_date(){
+		$array_revenue = array();
+		$doanh_thu_theo_ngay = 0;
+		for ($i=1; $i <=7 ; $i++) { 
+			$doanh_thu_theo_ngay = $this->get_revenue_of_the_date(strtotime( $i." days ago"));
+			array_push($array_revenue,$doanh_thu_theo_ngay);
+		}
+		//Đảo ngược mảng lại cho doanh thu nằm ở cuối mảng
+		return array_reverse($array_revenue) ;
+	}
+	//Lấy tổng doanh thu theo khoản thời gian, biến truyền vào dạng string ()
 	function get_revenue_date_range($start_date,$end_date){
 		$start_date_value = strtotime($start_date);
 		$end_date_value = strtotime($end_date);

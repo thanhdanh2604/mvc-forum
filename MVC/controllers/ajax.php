@@ -87,6 +87,9 @@ class ajax extends controller{
         }
         echo json_encode($array);
     }
+    function get_array_doanh_thu_7_ngay_gan_nhat(){
+       echo json_encode($this->model_teaching_recording->get_revenue_last_7_date()) ;
+    }
 }
 
 ?>

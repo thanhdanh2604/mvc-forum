@@ -2,6 +2,7 @@
 
 
 class M_account extends DB{
+
     function __construct()
     {
         $this->table = 'quanly';
@@ -16,16 +17,34 @@ class M_account extends DB{
             return $this->get_row($id);
         }
     }
-    function create_account($data){
-       // $pepper = getConfigVariable("pepper");
+    function create_account(){
         $username = $_POST['username'];
         $pwd = $_POST['password'];
-        $pwd_peppered = hash_hmac("sha256", $pwd, $pepper);
-        $pwd_hashed = password_hash($pwd_peppered, PASSWORD_ARGON2ID);
-        password_hash();
-        $this->insert($data);
+        $pwd_hashed = password_hash($pwd, PASSWORD_ARGON2ID);
+        $data = array(
+            "username"=>$username,
+            "password"=>$pwd_hashed
+        );
+        return $this->insert($data);
     }
-    
+    function check_pass(){
+
+        $username = $_POST['username'];
+        $pwd = $_POST['password'];
+       
+        $data_check = $this->get_list_with_condition('username',$username);
+
+        if($data_check==null){
+            return false;
+        }else{
+            if(password_verify($pwd,$data_check[0]['password'])){
+                return true;
+            }else{
+                return false;
+            }
+        }
+       
+    }
 }
 
 ?>

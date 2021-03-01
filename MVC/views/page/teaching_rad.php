@@ -2,7 +2,6 @@
                 function tinhgiogiaovienrd(id_teacher){
                     var teachtime = document.getElementsByClassName('totaltime_'+id_teacher);
                     var ottime = document.getElementsByClassName('ottime_'+id_teacher);
-                  
                       var i;var temp = 0; var tempot= 0;var j;var k;var m; tempctdk = 0; var tempotdk= 0;
                       for (i = 0; i < teachtime.length; i++) {
                         temp+= parseFloat(teachtime[i].textContent);
@@ -10,10 +9,9 @@
                       for (j = 0; j < ottime.length; j++) {
                         tempot+= parseFloat(ottime[j].textContent);
                       }
-                     
                       document.getElementById('totalhours_'+id_teacher).innerHTML = temp;
                       document.getElementById('othours_'+id_teacher).innerHTML = tempot;
-                  }
+                }
           </script>
      
         <div class="container-fluid">
@@ -169,7 +167,10 @@
                    </tr>
                  </thead>
                  <tbody>
-                  <?php foreach ($data['teacher_rad'] as  $value) { ?>
+                  <?php
+                  $tong_gio = 0;
+                  $tong_ot = 0;
+                   foreach ($data['teacher_rad'] as  $value) { ?>
                     <tr>
                       <td><?php echo $value['name'] ?></td>
                       <td style="color:red;font-weight:bold"  id="totalhours_<?php echo $value['id'] ?>"></td>
@@ -204,6 +205,7 @@
                     
                     <button onclick="choose_date()" id="confirm_button" class="btn btn-primary">Xem</button>
                   </form>
+              
           </div>
          
        <script> 

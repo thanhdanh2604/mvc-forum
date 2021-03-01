@@ -175,8 +175,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php  if(isset($data['data_sc'])){
-                    $tong_sc = 0;
+            
+                <?php $tong_sc = 0;  if(isset($data['data_sc'])){
                     $stt_sc = 1;
                     foreach ($data['data_sc'] as $value) { 
                         if(date('m-Y',strtotime($value['month']))===date('m-Y',$data['month'])){ ?>
@@ -222,7 +222,7 @@
                 document.getElementById("row_"+id).style.display = "none";
                 }
             };
-            xhttp.open("GET", "./ajax/ajax_delete_invoice/"+id, true);
+            xhttp.open("GET", "<?php echo $GLOBALS['DEFAUL_DOMAIN']?>ajax/ajax_delete_invoice/"+id, true);
             xhttp.send();
             }
         function delete_staff_cost(id) {
@@ -232,7 +232,7 @@
                 document.getElementById("row_sc_"+id).style.display = "none";
                 }
             };
-            xhttp.open("GET", "./ajax/ajax_delete_staff_cost/"+id, true);
+            xhttp.open("GET", "<?php echo $GLOBALS['DEFAUL_DOMAIN']?>ajax/ajax_delete_staff_cost/"+id, true);
             xhttp.send();
             }
             
