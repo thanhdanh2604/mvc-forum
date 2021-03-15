@@ -10,8 +10,6 @@ class M_teaching_history extends DB
 	{
 		$this->table = 'teaching_recording';
 		$this->key_id = 'id';
-		// Gọi Modal teacher
-		
 	}
 	function get_full_teaching_recording() {
 		return parent::get_list();
@@ -111,6 +109,7 @@ class M_teaching_history extends DB
 		}
 		return $tong_doanh_thu;
 	}
+
 	function get_summary_team_rad($start_date,$end_date){
 		$this->teacher = new M_teacher();
 		$data = $this->get_full_teaching_recording();
@@ -173,20 +172,23 @@ class M_teaching_history extends DB
 		}
 		return $details = array_merge($this->sapxeptimeline($array_mon),$this->sapxeptimeline($array_tue),$this->sapxeptimeline($array_web),$this->sapxeptimeline($array_thu),$this->sapxeptimeline($array_fri),$this->sapxeptimeline($array_sat),$this->sapxeptimeline($array_sun));
 	}
+	function get_array_teaching_time_teacher(){
+
+	}
 	function sapxeptimeline($array){
-		$n = count($array);
-		for ($i=0; $i < $n-1; $i++) { 
-		  for ($j=$i+1; $j < $n; $j++) { 
-		  
-			if(strtotime($array[$i]->starttime)>strtotime($array[$j]->starttime)){
-			  $temp=$array[$i];
-			  $array[$i] =  $array[$j];
-			  $array[$j] = $temp;
-			 }
-		  }
-		}
-		return $array;
-	  } 
+			$n = count($array);
+			for ($i=0; $i < $n-1; $i++) { 
+				for ($j=$i+1; $j < $n; $j++) { 
+				
+				if(strtotime($array[$i]->starttime)>strtotime($array[$j]->starttime)){
+					$temp=$array[$i];
+					$array[$i] =  $array[$j];
+					$array[$j] = $temp;
+				}
+				}
+			}
+			return $array;
+	} 
 }
 
 

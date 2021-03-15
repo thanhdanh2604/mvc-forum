@@ -69,7 +69,7 @@
                         <div class="sparkline-list">
                              <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1>Thống kê <span class="c3-ds-n">Lợi nhuận trước thuế</span></h1>
+                                    <h1><span class="c3-ds-n">Lợi nhuận trước thuế ( theo tháng )</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -87,7 +87,7 @@
                         <div class="sparkline7-list responsive-mg-b-30">
                             <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1>Thống kê <span class="c3-ds-n">Doanh thu thuần</span></h1>
+                                    <h1><span class="c3-ds-n">Doanh thu thuần ( theo tháng )</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -99,7 +99,7 @@
                         <div class="sparkline8-list">
                             <div class="sparkline8-hd">
                                 <div class="main-sparkline8-hd">
-                                    <h1>Thống kê <span class="c3-ds-n">chi phí văn phòng</span></h1>
+                                    <h1><span class="c3-ds-n">chi phí văn phòng ( theo tháng )</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline8-graph">
@@ -111,7 +111,7 @@
                         <div class="sparkline8-list">
                             <div class="sparkline8-hd">
                                 <div class="main-sparkline8-hd">
-                                    <h1>Thống kê <span class="c3-ds-n">chi phí nhân sự</span></h1>
+                                    <h1><span class="c3-ds-n">chi phí nhân sự ( theo tháng )</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline8-graph">

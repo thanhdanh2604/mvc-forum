@@ -18,7 +18,7 @@ class Home extends controller
             "page"=>'ban_tin'
             ]);
     }
-   
+    
 }
 
 ?>

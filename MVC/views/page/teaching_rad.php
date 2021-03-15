@@ -1,23 +1,37 @@
           <script>
-                function tinhgiogiaovienrd(id_teacher){
-                    var teachtime = document.getElementsByClassName('totaltime_'+id_teacher);
-                    var ottime = document.getElementsByClassName('ottime_'+id_teacher);
-                      var i;var temp = 0; var tempot= 0;var j;var k;var m; tempctdk = 0; var tempotdk= 0;
-                      for (i = 0; i < teachtime.length; i++) {
-                        temp+= parseFloat(teachtime[i].textContent);
-                      }
-                      for (j = 0; j < ottime.length; j++) {
-                        tempot+= parseFloat(ottime[j].textContent);
-                      }
-                      document.getElementById('totalhours_'+id_teacher).innerHTML = temp;
-                      document.getElementById('othours_'+id_teacher).innerHTML = tempot;
-                }
+            function tinhgiogiaovienrd(id_teacher){
+                var teachtime = document.getElementsByClassName('totaltime_'+id_teacher);
+                var ottime = document.getElementsByClassName('ottime_'+id_teacher);
+                  var i;var temp = 0; var tempot= 0;var j;var k;var m; tempctdk = 0; var tempotdk= 0;
+                  for (i = 0; i < teachtime.length; i++) {
+                    temp+= parseFloat(teachtime[i].textContent);
+                  }
+                  for (j = 0; j < ottime.length; j++) {
+                    tempot+= parseFloat(ottime[j].textContent);
+                  }
+                  document.getElementById('totalhours_'+id_teacher).innerHTML = temp;
+                  document.getElementById('othours_'+id_teacher).innerHTML = tempot;
+            }
+            function get_total_rad(){
+              var total_teachtime = document.getElementsByClassName('congtt');
+              var total_overtime = document.getElementsByClassName('congot');
+              var total_hour=0;
+              var total_overtime_hours=0;
+              for(i=0; i < total_teachtime.length; i++){
+                  total_hour+= parseFloat(total_teachtime[i].textContent);
+              }
+              for(j=0; j < total_overtime.length; j++){
+                total_overtime_hours+= parseFloat(total_overtime[j].textContent);
+              }
+              document.getElementById('total_teaching_time').innerHTML = total_hour;
+              document.getElementById('total_overtime').innerHTML = total_overtime_hours;
+            } 
           </script>
      
         <div class="container-fluid">
         
         <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
             <div class="white-box">
               <table id="table-class" class="table table-hover table-striped table-bordered">
                   <caption style="font-size:2em"> Ngày <?php echo date('d-M-Y',strtotime($data['start_date']))." Đến Ngày ".date('d-M-Y',strtotime($data['end_date'])) ?></caption>
@@ -29,12 +43,14 @@
                         <th>Days</th>
                         <th>Form</th>
                         <th>To</th>
-                        <th>Total</th>
+                        <th>Công</th>
+                        <th>Công thường</th>
                         <th>OT</th>
                         <th>Subject</th>
                       </tr>
                     </thead>
                     <tbody>
+                      
                         <?php foreach ($data['rad'] as $key=> $value) {
                             ?>
                                   <tr>    
@@ -70,7 +86,18 @@
                                       <td><?php  echo date('D',$value->time) ?></td>
                                       <td style="color:blue;font-weight:bold"><?php  echo $value->starttime ?></td>
                                       <td><?php  echo $value->endtime ?></td>
-                                      <td class="totaltime_<?php echo $value->id_prof; ?>" style="color:red;font-weight:bold">
+                                      <td class="congtt totaltime_<?php echo $value->id_prof; ?>" style="color:green;font-weight:bold">
+                                      
+                                      <?php if($value->dd_prof==1){
+                                        if(isset($value->teacher_hours)){
+                                          echo $value->teacher_hours;
+                                        }else{
+                                          echo $value->hours;
+                                        }
+                                      }else{
+                                        echo 0;
+                                      }  ?></td>
+                                      <td  style="color:red;font-weight:bold">
                                           <?php
                                           if(date('N',$value->time)>=1 && date('N',$value->time)<=5){
                                               if( strtotime($value->starttime)>=strtotime('09:00')&&strtotime($value->endtime)<=strtotime('18:30')&& $value->dd_prof==1)
@@ -105,7 +132,8 @@
                                           }
                                           ?>
                                       </td>
-                                      <td class="ottime_<?php echo $value->id_prof; ?>" style="color:green;font-weight:bold">
+
+                                      <td class="congot ottime_<?php echo $value->id_prof; ?>" >
                                         <?php
                                           
                                           if($value->dd_prof==1)
@@ -162,33 +190,39 @@
                  <thead>
                    <tr>
                     <th>Tên</th>
-                    <th>Công thường</th>                             
+                    <th>Công thực tế</th>                             
                     <th>Công OT</th>
                    </tr>
                  </thead>
                  <tbody>
+                 
                   <?php
-                  $tong_gio = 0;
-                  $tong_ot = 0;
                    foreach ($data['teacher_rad'] as  $value) { ?>
                     <tr>
                       <td><?php echo $value['name'] ?></td>
-                      <td style="color:red;font-weight:bold"  id="totalhours_<?php echo $value['id'] ?>"></td>
+                      <td class="cong_thuc_te" style="color:red;font-weight:bold"  id="totalhours_<?php echo $value['id'] ?>"></td>
                       <td style="color:green;font-weight:bold" id="othours_<?php echo $value['id'] ?>"></td>
                       <script>
                         tinhgiogiaovienrd(<?php echo $value['id'] ?>);
+                        
                       </script>
                     </tr>
                   <?php } ?>
+                  
+                  <tr class="info">
+                      <td><b>TỔNG GIỜ DẠY THỰC TẾ</b></td>
+                      <td style="font-size:20px" id="total_teaching_time"></td>
+                      <td style="font-size:20px"id="total_overtime"></td>
+                  </tr>
+                  <script>get_total_rad();</script>
                  </tbody>
                </table>
-               
-            
-            
+
             </div>
           </div>
-          <div class="white-box col-xs-6 col-sm-6 col-md-4 col-lg-4">
-              <caption>Tùy chỉnh thời gian</caption>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+              <div class="white-box">
+                  <caption>Tùy chỉnh thời gian</caption>
                   <form action="">
                     <div>
                       <div class="form-group">
@@ -205,9 +239,15 @@
                     
                     <button onclick="choose_date()" id="confirm_button" class="btn btn-primary">Xem</button>
                   </form>
+              </div>
+              <div class="white-box">
+                    <ul>
+                      <li></li>
+                    </ul>
+              </div>
               
           </div>
-         
+              
        <script> 
   
         function choose_date(){

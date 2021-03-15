@@ -153,5 +153,22 @@ class DB
        }
        return false;
     }
+    function get_colum_with_id($id,$colum){
+        $this->connect_db();
+        $sql = "SELECT ".$colum." FROM ".$this->table." WHERE ".$this->key_id."=". $id;
+        $result = mysqli_query($this->__conn, $sql);
+       if (!$result){
+           die ('Câu truy vấn bị sai');
+       }
+       $row = mysqli_fetch_assoc($result);
+
+       // Xóa kết quả khỏi bộ nhớ
+       mysqli_free_result($result);
+
+       if ($row){
+           return $row;
+       }
+       return false;
+    }
 }
  ?>

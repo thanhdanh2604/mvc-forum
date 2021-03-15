@@ -3,12 +3,17 @@ class ajax extends controller{
     public $model_invoice;
     public $model_staff_cost;
     public $model_teaching_recording;
-  
+    public $model_teacher;
+    public $model_student;
+    public $model_subject;
     function __construct()
     {
         $this->model_invoice = $this->model('M_invoice');
         $this->model_staff_cost = $this->model('M_staff_cost');
         $this->model_teaching_recording = $this->model('M_teaching_history');
+        $this->model_teacher = $this->model('M_teacher');
+        $this->model_student= $this->model('M_student');
+        $this->model_subject= $this->model('M_subject');
     }
     function ajax_edit_invoice(){
         $value = $_POST['value'];
@@ -88,8 +93,42 @@ class ajax extends controller{
         echo json_encode($array);
     }
     function get_array_doanh_thu_7_ngay_gan_nhat(){
-       echo json_encode($this->model_teaching_recording->get_revenue_last_7_date()) ;
+      echo json_encode($this->model_teaching_recording->get_revenue_last_7_date()) ;
+    }
+    function ajax_get_all_rad_teaching_detail(){
+        $data = $this->model_teaching_recording->get_full_teaching_recording();
+		$array_teaching_rad = array();
+		foreach ($data as $key ) {
+			if ($key['teaching_history']!="") {
+				$data1 = json_decode($key['teaching_history']);
+				foreach ($data1 as  $value1) {
+					if($this->model_teacher->is_r_a_d($value1->ma_giao_vien)){
+						foreach ($value1->lich_hoc_du_kien as $key2 => $value2) {
+							foreach ($value2 as $key3 => $value3) {
+								array_push($array_teaching_rad,$value2);
+							}
+						}
+					}
+				}
+			}
+		}
+        
+        $array_student = $this->model_student->get_id_and_name_student();
+
+        $array_teacher_rad = $this->model_teacher->get_rd_teacher();
+
+        $subject_name = $this->model_subject->get_all_subject();
+
+        // Hiển thị data
+        $this->view('ajax',[
+            "page"=>'ajax_rad',
+            "data_teaching"=> $array_teaching_rad,
+            "subject_name"=> $subject_name,
+            "student"=>$array_student,
+            "teacher_rad" => $array_teacher_rad
+        ]);
     }
 }
+
 
 ?>
