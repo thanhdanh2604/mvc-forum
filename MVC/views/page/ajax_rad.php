@@ -7,7 +7,7 @@
     <th>Student's name</th>
     <th>Date</th>
     <th>Days</th>
-    <th>Form</th>
+    <th>From</th>
     <th>To</th>
     <th>Công</th>
     <th>Subject</th>
@@ -48,24 +48,21 @@
             }
             ?></td>
             <td>
-              <?php  echo date('m-d-y',$key) ?>
+              <?php  echo date('M-d-Y',$key) ?>
             </td>
             <td>
               <?php  echo date('D',$key) ?>
             </td>
             <td>
-            <?php if(isset($value->starttime)){
-               echo $value->starttime;
-            }
-              
-              ?>
-            
+                <?php if(isset($value->starttime)){
+                  echo $value->starttime;
+                }
+                  ?>
             </td>
             <td><?php if(isset($value->endtime)){
                echo $value->endtime;
             }   ?></td>
             <td>
-            
             <?php if($value->dd_prof==1){
               if(isset($value->teacher_hours)){
                 echo $value->teacher_hours;
@@ -77,7 +74,6 @@
             }  ?>
             
             </td>
-
             <td><?php 
             foreach ($data['subject_name'] as  $name) {
               if(isset($value->id_subject) && $name['id']==$value->id_subject){

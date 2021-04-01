@@ -23,10 +23,12 @@ echo $time;
   <tbody>
     <tr>
       <td>Trần Văn Quân</td>
-      <td>Đã thay đổi 3</td>
+      <td>Thay đổi 10</td>
     </tr>
   </tbody>
 </table>
 </body>
 </html>
+<?php
 
+?>

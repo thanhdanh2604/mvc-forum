@@ -172,9 +172,7 @@ class M_teaching_history extends DB
 		}
 		return $details = array_merge($this->sapxeptimeline($array_mon),$this->sapxeptimeline($array_tue),$this->sapxeptimeline($array_web),$this->sapxeptimeline($array_thu),$this->sapxeptimeline($array_fri),$this->sapxeptimeline($array_sat),$this->sapxeptimeline($array_sun));
 	}
-	function get_array_teaching_time_teacher(){
 
-	}
 	function sapxeptimeline($array){
 			$n = count($array);
 			for ($i=0; $i < $n-1; $i++) { 
@@ -188,7 +186,52 @@ class M_teaching_history extends DB
 				}
 			}
 			return $array;
-	} 
+	}
+	function tinh_thoi_gian_con_lai($id){
+    $study_hour = 0;
+    $temp_json = $this->get_detail_teaching_recording($id);
+    $objdd = json_decode($temp_json['teaching_history']);
+    if ($objdd==null) {
+      $study_hour=0;
+    }
+    else{
+      if ($temp_json['type']==1) {
+        foreach ($objdd as $key => $value) {
+          foreach ($value->lich_hoc_du_kien as $key1 => $value1) {
+            foreach ($value1 as $key2 => $value2) {
+              if (isset($value2->hours)&& $value2->dd_student==1&& !isset($value1->finish)) {
+                $study_hour+= $value2->hours;
+              }
+            }
+          }
+        }
+        $time_left = $temp_json['total_hours']- $study_hour;
+        return $time_left;
+      }
+      else {
+        // nếu là lớp nhóm
+        $temp_array = array();
+        $obj_id_student = json_decode($temp_json['id_student']);
+        foreach ( $obj_id_student as $key_id => $value_id) {
+          $study_hour=0;
+          foreach ($objdd as $key => $value) {
+            foreach ($value->lich_hoc_du_kien as $key1 => $value1) {
+              foreach ($value1 as $key2 => $value2) {
+                foreach ($value2->dd_student as $key3 => $value3) {
+                    if (isset($value2->hours)&& $value3==1 && $key3 == $value_id) {
+                      $study_hour+= $value2->hours;
+                    }
+                }
+              }
+            }
+          }
+          $temp_array[$value_id]= $temp_json['total_hours'] - $study_hour;
+        }
+        return $temp_array;
+      }     
+    }
+    
+  }
 }
 
 

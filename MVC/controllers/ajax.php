@@ -33,12 +33,12 @@ class ajax extends controller{
         $this->model_staff_cost->edit_staff_cost($data,$id);
     }
     function ajax_delete_staff_cost($id){
-        $this->model_staff_cost->delete_staff_cost($id);
+        $this->model_staff_cost->delete_staff_cost($id); 
     }
     function get_array_doanh_thu_trong_nam(){
         $array = array();
         for ($m=1; $m<=12; $m++) {
-            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_teaching_recording->get_revenue_date_range($start_date,$end_date);
@@ -51,12 +51,11 @@ class ajax extends controller{
     function get_array_chi_phi_van_phong(){
         $array = array();
         for ($m=1; $m<=12; $m++) {
-            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_invoice->get_total_cost_invoice($start_date,$end_date);
-          
-                array_push($array,$value);
+            array_push($array,$value);
            
         }
         echo json_encode($array);
@@ -64,12 +63,12 @@ class ajax extends controller{
     function get_array_chi_phi_nhan_su(){
         $array = array();
         for ($m=1; $m<=12; $m++) {
-            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
            // if($value!=0){
-                array_push($array,$value);
+            array_push($array,$value);
            // }else{ continue;}
         }
         echo json_encode($array);
@@ -77,7 +76,7 @@ class ajax extends controller{
     function get_array_doanh_thu_thuc_te(){
         $array = array();
         for ($m=1; $m<=12; $m++) {
-            $month = date('F', mktime(0,0,0,$m, 1, date('Y')));
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
             // Lấy doanh thu, chi phí văn phòng, và chi phí nhân sự
@@ -127,6 +126,91 @@ class ajax extends controller{
             "student"=>$array_student,
             "teacher_rad" => $array_teacher_rad
         ]);
+    }
+    function ajax_get_all_teaching_time(){
+        $data = $this->model_teaching_recording->get_full_teaching_recording();
+        $array_student = $this->model_student->get_id_and_name_student();
+        $array_teacher = $this->model_teacher->get_all_teacher();
+        $subject_name = $this->model_subject->get_all_subject();
+        // Hiển thị data
+        $this->view('ajax',[
+            "page"=>'ajax_all_teaching_time',
+            "data_teaching"=> $data,
+            "subject_name"=> $subject_name,
+            "student"=>$array_student,
+            "teacher" => $array_teacher
+        ]);
+    }
+    function ajax_get_student_out_of_hours(){
+            $data_all_teaching_record = $this->model_teaching_recording->get_full_teaching_recording();
+            $data_student = $this->model_student->get_id_and_name_student();
+            $data_out_of_hours = array();
+            foreach($data_all_teaching_record as $value){
+              if($value['type']==1){
+                $time_left_temp = $this->model_teaching_recording->tinh_thoi_gian_con_lai($value['id']);
+                if ( $time_left_temp<=6 ) {
+                  $temp_array = array();
+                  $temp_array['name_teaching_recording']=$value['name'];
+                  $temp_array['id_student']=$value['id_student'];
+                  $temp_array['time_left']= $time_left_temp;
+                  $temp_array['finish'] = $value['finish'];
+                  $data_out_of_hours[]=$temp_array;
+                }
+              }
+              elseif($value['type']==2){
+                $time_left_temp = $this->model_teaching_recording->tinh_thoi_gian_con_lai($value['id']);
+                foreach($time_left_temp as $k=>$v){
+                  if($v<=6){
+                    $temp_array = array();
+                    $temp_array['name_teaching_recording']=$value['name'];
+                    $temp_array['id_student']=$k;
+                    $temp_array['time_left']= $v;
+                    $temp_array['finish'] = $value['finish'];
+                    $data_out_of_hours[]=$temp_array;
+                  }
+                }
+              }
+        
+            }
+            echo "<table class=\"table\">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Gói</th>
+                  <th>Time left</th>
+                </tr>
+              </thead>
+              <tbody>";
+            echo "<tr>";
+           
+            foreach($data_out_of_hours as $value_outpackage){
+              if ($value_outpackage['finish']==1) {
+                echo  "<td style=\"color:blue\">";
+                if(!is_array($value_outpackage['id_student'])){
+                  foreach ($data_student as  $name) {
+                      if($name['id']==$value_outpackage['id_student']){
+                        echo $name['name'];
+                        break;
+                      }
+                  }
+                  }else{// Nếu là lớp nhóm
+                  foreach ($value_outpackage['id_student'] as  $id_student) {
+                      foreach ($data_student as  $name) {
+                      if($name['id']==$id_student){
+                          echo $name['name']."</br>";
+                          break;
+                      }
+                      }
+                  }
+                 }
+                echo  "</td>";
+                echo  "<td style=\"color:green\">".$value_outpackage['name_teaching_recording']."</td>";
+                echo  "<td style=\"color:red\">".$value_outpackage['time_left']."</td>";
+                echo "</tr>";
+              }
+            }
+             echo "</tbody></table>";
+          
     }
 }
 

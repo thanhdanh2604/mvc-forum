@@ -36,8 +36,8 @@ class login extends controller
         $pwd = $_POST['password'];
         return $this->account->create_account($username,$pwd);
     }
-    function delete_account(){
-        // Chưa xây dựng
+    function delete_account($id){
+        return $this->account->delete_account($id);
     }
    
 }
