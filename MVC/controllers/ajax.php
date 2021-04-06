@@ -37,14 +37,13 @@ class ajax extends controller{
     }
     function get_array_doanh_thu_trong_nam(){
         $array = array();
-        for ($m=1; $m<=12; $m++) {
+        $this_month = date('n');
+        for ($m=1; $m<=$this_month; $m++) {
             $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_teaching_recording->get_revenue_date_range($start_date,$end_date);
-           // if($value!=0){
-                array_push($array,$value);
-           // }else{ continue;}
+            array_push($array,$value);
         }
         echo json_encode($array);
     }
@@ -56,9 +55,8 @@ class ajax extends controller{
             $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_invoice->get_total_cost_invoice($start_date,$end_date);
             array_push($array,$value);
-           
         }
-        echo json_encode($array);
+        return $array;
     }
     function get_array_chi_phi_nhan_su(){
         $array = array();
@@ -67,15 +65,59 @@ class ajax extends controller{
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
             $value = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
-           // if($value!=0){
             array_push($array,$value);
-           // }else{ continue;}
         }
-        echo json_encode($array);
+        return $array;
+    }
+    function get_chi_phi_vp_ns(){
+        $array_vp = array();
+        $array_sc = array();
+        $this_month = date('n');
+        for ($m=1; $m<=$this_month; $m++) {
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            $sc_value = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
+            $vp_value = $this->model_invoice->get_total_cost_invoice($start_date,$end_date);
+            array_push($array_vp,$vp_value);
+            array_push($array_sc,$sc_value);
+        }
+        $final_object = '{
+          "Chi phí Văn Phòng":'.json_encode($array_vp).',
+          "Chi phí Nhân Sự:":'.json_encode($array_sc).'
+        }';
+        echo $final_object;
+    }
+    function get_array_dau_ra_dau_vao(){
+      $array_dau_vao = array();
+      $array_dau_ra = array();
+      $this_month = date('n');
+      for ($m=1; $m<=$this_month; $m++) {
+          $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
+          $start_date = date('Y-m-01',strtotime($month));
+          $end_date = date('Y-m-t',strtotime($month));
+          // Lấy doanh thu, chi phí văn phòng, và chi phí nhân sự
+          $doanh_thu_dau_vao = $this->model_teaching_recording->get_revenue_date_range($start_date,$end_date);
+
+          $chi_phi_van_phong = $this->model_invoice->get_total_cost_invoice($start_date,$end_date);
+          $chi_phi_ns = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
+         
+          // trừ chi 
+          $chi_phi_dau_ra = $chi_phi_van_phong + $chi_phi_ns;
+          
+          array_push($array_dau_vao,$doanh_thu_dau_vao);
+          array_push($array_dau_ra,$chi_phi_dau_ra);
+      }
+      $final_object = '{
+        "Doanh thu đầu vào":'.json_encode($array_dau_vao).',
+        "Tổng chi đầu ra":'.json_encode($array_dau_ra).'
+      }';
+      echo $final_object;
     }
     function get_array_doanh_thu_thuc_te(){
         $array = array();
-        for ($m=1; $m<=12; $m++) {
+        $this_month = date('n');
+        for ($m=1; $m<=$this_month; $m++) {
             $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
             $start_date = date('Y-m-01',strtotime($month));
             $end_date = date('Y-m-t',strtotime($month));
@@ -96,21 +138,21 @@ class ajax extends controller{
     }
     function ajax_get_all_rad_teaching_detail(){
         $data = $this->model_teaching_recording->get_full_teaching_recording();
-		$array_teaching_rad = array();
-		foreach ($data as $key ) {
-			if ($key['teaching_history']!="") {
-				$data1 = json_decode($key['teaching_history']);
-				foreach ($data1 as  $value1) {
-					if($this->model_teacher->is_r_a_d($value1->ma_giao_vien)){
-						foreach ($value1->lich_hoc_du_kien as $key2 => $value2) {
-							foreach ($value2 as $key3 => $value3) {
-								array_push($array_teaching_rad,$value2);
-							}
-						}
-					}
-				}
-			}
-		}
+        $array_teaching_rad = array();
+        foreach ($data as $key ) {
+          if ($key['teaching_history']!="") {
+            $data1 = json_decode($key['teaching_history']);
+            foreach ($data1 as  $value1) {
+              if($this->model_teacher->is_r_a_d($value1->ma_giao_vien)){
+                foreach ($value1->lich_hoc_du_kien as $key2 => $value2) {
+                  foreach ($value2 as $key3 => $value3) {
+                    array_push($array_teaching_rad,$value2);
+                  }
+                }
+              }
+            }
+          }
+        }
         
         $array_student = $this->model_student->get_id_and_name_student();
 

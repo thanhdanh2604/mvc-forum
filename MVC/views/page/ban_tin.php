@@ -46,12 +46,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                      
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                       
-                    </div>
+                  
+                  
                 </div>
             </div>
         </div>
@@ -69,7 +65,7 @@
                         <div class="sparkline-list">
                              <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1><span class="c3-ds-n">Lợi nhuận trước thuế ( theo tháng )</span></h1>
+                                    <h1><span class="c3-ds-n">Lợi nhuận trước thuế ( Đã trừ chi phí VP + NS )</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -83,11 +79,11 @@
         <div class="pie-bar-line-area mg-tb-30">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="sparkline7-list responsive-mg-b-30">
                             <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1><span class="c3-ds-n">Doanh thu thuần ( theo tháng )</span></h1>
+                                    <h1><span class="c3-ds-n">Doanh thu chưa trừ chi phí</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -95,41 +91,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="sparkline8-list">
-                            <div class="sparkline8-hd">
-                                <div class="main-sparkline8-hd">
-                                    <h1><span class="c3-ds-n">chi phí văn phòng ( theo tháng )</span></h1>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="sparkline7-list responsive-mg-b-30">
+                            <div class="sparkline7-hd">
+                                <div class="main-spark7-hd">
+                                    <h1><span class="c3-ds-n">Chi phí Văn Phòng và Nhân Sự</span></h1>
                                 </div>
                             </div>
-                            <div class="sparkline8-graph">
-                                <div id="chart_vp"></div>
+                            <div class="sparkline7-graph">
+                                <div id="chart_vp_ns"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="sparkline8-list">
-                            <div class="sparkline8-hd">
-                                <div class="main-sparkline8-hd">
-                                    <h1><span class="c3-ds-n">chi phí nhân sự ( theo tháng )</span></h1>
-                                </div>
-                            </div>
-                            <div class="sparkline8-graph">
-                                <div id="chart_ns"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <div>
                 </div>
+                
             </div>
         </div>
-      
+        <div class="row mg-tb-30">
+                    <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                           <div class="container white-box">
+                               <h4>Tổng chi đầu ra - Doanh thu đầu vào</h4>   
+                               <div id="chart_dau_ra_dau_vao"></div>
+                           </div>
+                       </div>
+                    </div>
+                    
+                </div>
        
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="footer-copy-right">
-                        
                         </div>
                     </div>
                 </div>

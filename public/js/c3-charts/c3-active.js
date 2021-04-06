@@ -28,7 +28,12 @@
                 colors:{
                     ' Doanh thu trong ngày': '#006DF0',
                 },
-                type: 'spline'
+                type: 'spline',
+                labels: {
+                    format: {
+                        "Doanh thu trong ngày": d3.format("$,")
+                    }
+                },
             },
             axis: {
                 x: {
@@ -63,7 +68,12 @@
                 colors:{
                     ' Chi phí doanh thu': '#006DF0',
                 },
-                type: 'bar'
+                type: 'bar',
+                labels: {
+                    format: {
+                        "Chi phí doanh thu": d3.format("$,")
+                    }
+                },
             },
             axis: {
                 x: {
@@ -89,9 +99,13 @@
                 ],
                 colors:{
                     'Doanh thu': '#cb42f5',
-                
                 },
-                type: 'spline'
+                type: 'bar',
+                labels: {
+                    format: {
+                        "Doanh thu": d3.format("$,")
+                    }
+                },
             },
             axis: {
                 x: {
@@ -106,77 +120,68 @@
         });
         
     });
-    $.get( "./ajax/get_array_chi_phi_van_phong", function( data ) {
-        var final_vp =  array_vp.concat(JSON.parse(data));
-        c3.generate({
-            bindto: '#chart_vp',
-            data:{
-                x: 'x',
-                columns: [
-                    ['x', 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De'],
-                    final_vp
-                ],
-                colors:{
-                    'Chi phí văn phòng': '#47ac47',
-                },
-                type: 'spline'
-            },
-            axis: {
-                x: {
-                    type: 'category'
-                },
-                y : {
-                    tick: {
-                        format: d3.format("$,")
-                    }
-                }
-            },
-        });
-    });
-    $.get( "./ajax/get_array_chi_phi_nhan_su", function( data ) {
-        var final_ns =  array_ns.concat(JSON.parse(data));
-        c3.generate({
-            bindto: '#chart_ns',
-            data:{
-                x: 'x',
-                columns: [
-                    ['x', '1','2','3','4','5','6','7','8','9','10','11','12'],
-                    final_ns
-                ],
-                colors:{
-                    'Chi phí nhân sự': '#e80b92',
-                }
-                
-            },
-            axis: {
-                x: {
-                    type: 'category'
-                },
-                y : {
-                    tick: {
-                        format: d3.format("$,")
-                    }
-                }
-            },
-        });
-    });
-    // Chart R&D
+    // So sánh chi phí Văn Phòng và chi phí Nhân Sự
     c3.generate({
-        bindto: '#chart_rad',
-        data:{
-            x: 'x',
-            columns: [
-                ['x', '1','2','3','4','5','6','7','8','9','10','11','12'],
-                ['Tài', 30, 200, 100, 400, 150, 250],
-                ['Trâm Anh', 10, 50, 900, 100, 450, 250],
-                ['Kiệt', 300, 201, 300, 800, 250, 950]
-            ],
+        data: {
+            url: './ajax/get_chi_phi_vp_ns',
+            mimeType: 'json',
             colors:{
-                'Tài': '#006DF0',
-                'Trâm Anh' :'#da0101',
-                'Kiệt':'#40da01'
+                "Chi phí Văn Phòng": '#ff0000',
+                "Chi phí Nhân Sự": '#0000ff'
             },
-            type: 'bar'
-        }
+            labels: {
+                format: {
+                    "Chi phí Văn Phòng": d3.format("$,"),
+                    "Chi phí Nhân Sự": d3.format("$,")
+                }
+            },
+            
+        },
+        types: {
+            "Chi phí Văn Phòng": 'line',
+            "Chi phí Nhân Sự": 'spline'
+        },
+        bindto: '#chart_vp_ns',
+        axis: {
+            x: {
+                type: 'category',
+                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De']
+            },
+            y : {
+                tick: {
+                    format: d3.format("$,")
+                }
+            }
+        },  
     });
+    c3.generate({
+        data: {
+            url: './ajax/get_array_dau_ra_dau_vao',
+            mimeType: 'json',
+            types: {
+                'Doanh thu đầu vào': 'bar',
+                'Tổng chi đầu ra': 'line'
+            },
+            labels: {
+                format: {
+                    "Doanh thu đầu vào": d3.format("$,"),
+                    "Tổng chi đầu ra": d3.format("$,")
+                }
+            },
+        },
+        bindto: '#chart_dau_ra_dau_vao',
+        
+        axis: {
+            x: {
+                type: 'category',
+                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De']
+            },
+            y : {
+                tick: {
+                    format: d3.format("$,")
+                }
+            }
+        },  
+    })
 })(jQuery); 
+
