@@ -39,7 +39,12 @@
                         <div class="tab-content">
                             <div style="margin-top:30px" role="tabpanel" class="tab-pane active" id="Invoice">
                                 <form action="<?php echo $GLOBALS['DEFAUL_DOMAIN']?>invoice/add_invoice" method="POST" role="form">
-                                 
+                                    <div class="form-group">
+                                        <label>
+                                            <input name="type" type="checkbox" value="2">
+                                            Reinvest
+                                        </label>
+                                    </div>
                                     <div class="form-group">
                                         <label for="">Mã hóa đơn</label>
                                         <input name="ma_hoa_don" type="text" class="form-control" id="" placeholder="Mã hóa đơn">

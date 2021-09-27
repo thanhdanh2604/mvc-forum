@@ -1,12 +1,10 @@
-<?php
 
-
-
-?>
 
 <table >
+  
     <thead>
-         <tr >
+         <tr>
+           
             <th>Teacher's name</th>
             <th>Student's name</th>
             <th>Date</th>
@@ -15,6 +13,8 @@
             <th>To</th>
             <th>Công</th>
             <th>Subject</th>
+            <th>Giờ học sinh</th>
+            <th>Doanh thu</th>
          </tr>
     </thead>
     <tbody>
@@ -23,8 +23,10 @@
          foreach ($json_buoi_hoc as $value1) { 
           foreach($value1->lich_hoc_du_kien as $buoi_hoc){
             foreach($buoi_hoc as $time=>$chi_tiet_buoi){
+              
            ?>
           <tr>
+          
             <td>
               <?php
              
@@ -37,29 +39,33 @@
             </td>
             <td>
               <?php
-              if(!is_array($chi_tiet_buoi->id_student)){
-                foreach ($data['student'] as  $name) {
+    
+               
+               if(is_array($chi_tiet_buoi->id_student)){
+                foreach ($chi_tiet_buoi->id_student as  $id_student) {
+                  foreach ($data['student'] as  $name) {
+                  if($name['id']==$id_student){
+                      echo $name['name']."</br>";
+                      break;
+                  }
+                  }
+                }
+               }elseif(isset($chi_tiet_buoi->id_student)){
+                  foreach ($data['student'] as  $name) {
                     if($name['id']==$chi_tiet_buoi->id_student){
                     echo $name['name'];
                     break;
                     }
-                }
-                }else{// Nếu là lớp nhóm
-                foreach ($chi_tiet_buoi->id_student as  $id_student) {
-                    foreach ($data['student'] as  $name) {
-                    if($name['id']==$id_student){
-                        echo $name['name']."</br>";
-                        break;
-                    }
-                    }
-                }
+                  }
+               }else{
+                 print_r($chi_tiet_buoi);
                }
              ?>
             </td>
             <td>
               <?php
                if($time != ""){
-              echo date('M-d-y',$time);
+              echo date('n/j/y',$time);
             }else{ 
               echo $time;
             } 
@@ -72,15 +78,19 @@
             <td><?php if(isset($chi_tiet_buoi->endtime)){ echo $chi_tiet_buoi->endtime; } ?></td>
             <td>
               <?php
-              if(isset($chi_tiet_buoi->hours)){
-                if(isset($chi_tiet_buoi->teacher_hours)){
-                  echo $chi_tiet_buoi->teacher_hours;
+                if($chi_tiet_buoi->dd_prof ==1){
+                  if(isset($chi_tiet_buoi->teacher_hours)){
+                    echo $chi_tiet_buoi->teacher_hours;
+                  }elseif(isset($chi_tiet_buoi->hours)){
+                    echo $chi_tiet_buoi->hours;
+                  }else{
+                    echo "Dữ liệu cũ";// Debug dữ liệu cũ xem có lỗi với dữ liệu mới hay không
+                  }
                 }else{
-                  echo $chi_tiet_buoi->hours ;
+                  echo "Chưa điểm danh";
                 }
-              }else{
-              echo 0;
-              } ?>
+                
+              ?>
             </td>
             <td>
               <?php if(isset($chi_tiet_buoi->id_subject)){
@@ -88,13 +98,69 @@
                   if($name['id']==$chi_tiet_buoi->id_subject){
                     echo $name['name'];
                     break;
-              } }  }?></td>
+              } }  }?>
+            </td>
+            <td>
+              <?php
+              if($chi_tiet_buoi->dd_student ==1 && isset($chi_tiet_buoi->hours)){
+                  echo $chi_tiet_buoi->hours;
+              }else{
+                echo 0;
+              } ?>
+            </td>
+            <td>
+              <?php 
+              if(isset($chi_tiet_buoi->doanh_thu))
+              { 
+                echo $chi_tiet_buoi->doanh_thu; 
+              }else echo 0;  ?>
+            </td>
           </tr>
 
-       <?php } } }
+       <?php  } } }
        } ?>
     
     </tbody>
 </table>
 
+<!-- Chi tiết chi phí nhân sự-->
+<table class="table table-hover">
+<caption> Chi phí nhân sự</caption>
+  <thead>
+    <tr>
+      <th>Tháng</th>
+      <th>Tiền</th>
+    </tr>
+  </thead>
+  <tbody>
 
+  <?php
+
+  foreach($data['data_staff_cost'] as $key=>$value) { ?>
+    <tr>
+      <td>Tháng <?php echo $key+1; ?></td>
+      <td> <?php echo $value; ?></td>
+    </tr>
+  <?php } ?>
+  </tbody>
+</table>
+
+<!-- Chi tiết chi phí văn phòng-->
+
+<table class="table table-hover">
+<caption> Chi phí văn phòng</caption>
+  <thead>
+    <tr>
+      <th>Tháng</th>
+      <th>Tiền</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach($data['data_invoice'] as $key=>$value) { ?>
+    <tr>
+      <td>Tháng <?php echo $key+1; ?></td>
+      <td> <?php echo $value; ?></td>
+    </tr>
+  <?php } ?>
+  </tbody>
+</table>

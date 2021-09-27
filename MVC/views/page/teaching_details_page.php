@@ -26,8 +26,10 @@
                          </tr>
                     </thead>
                     <tbody>
-                       
-                    <?php $stt=1; foreach ($data['data_teaching'] as  $value) { 
+                    <?php   $total_hour = 0;
+                    $total_income = 0; ?>
+                    <?php $stt=1; 
+                    foreach ($data['data_teaching'] as  $value) { 
                         foreach ($value as $time => $detail) {
                          // if($detail->dd_student==1) {  ?>
                         <tr>
@@ -41,23 +43,28 @@
                              }  ?></td>
                           <td style="font-weight:bold">
                           <?php
-                            if(!is_array($detail->id_student)){
-                            foreach ($data['student'] as  $name) {
+
+                          if(is_array($detail->id_student)){
+                            foreach ($detail->id_student as  $id_student) {
+                              foreach ($data['student'] as  $name) {
+                              if($name['id']==$id_student){
+                                  echo $name['name']." - </br>";
+                                  break;
+                              }
+                              }
+                            }
+                           }elseif(isset($detail->id_student)){
+                              foreach ($data['student'] as  $name) {
                                 if($name['id']==$detail->id_student){
                                 echo $name['name'];
                                 break;
                                 }
-                            }
-                            }else{// Nếu là lớp nhóm
-                            foreach ($detail->id_student as  $id_student) {
-                                foreach ($data['student'] as  $name) {
-                                if($name['id']==$id_student){
-                                    echo $name['name']."</br>";
-                                    break;
-                                }
-                                }
-                            }
-                            }?>
+                              }
+                           }else{
+                             echo "Dữ liệu lỗi, liên hệ Admin";
+                           }
+
+                            ?>
                             </td>
                             <td>
                          <?php  echo date('d-M-y',$time) ?></td>
@@ -65,22 +72,25 @@
                             <td class="hours">
                             <?php
 
-                            // Khúc này phải * theo số lượng học sinh do mặc định số giờ là cho một học sinh
+                           
                             if(isset($detail->hours)){
-                              if(is_array($detail->id_student)){
-                                echo $detail->hours * count($detail->id_student);
-                              }else{
+                              // Cộng vào tổng giờ
+                                $total_hour+=$detail->hours;
                                 echo $detail->hours;
-                              }
-                                
                               }else{
-                              echo 0;
-                              }  ?>
+                                echo 0;
+                              } 
+                              
+                              ?>
                             </td>
                             <td style="display:none">
                               <?php print_r($detail->dd_student); ?>
                             </td>
-                            <td class="doanh_thu"><?php echo $detail->doanh_thu ?></td>
+                            <td class="doanh_thu">
+                              <?php
+                              $total_income+= $detail->doanh_thu;
+                              echo $detail->doanh_thu; ?>
+                            </td>
                             <td>
                               <?php 
                                 foreach ($data['subject_name'] as  $name) {
@@ -127,9 +137,10 @@
                          </tr>
                        </thead>
                        <tbody>
+                        
                          <tr style="color:red;font-size:20px">
-                           <td id="total_hour"></td>
-                           <td id="total_dt"></td>
+                           <td id=""> <?php echo $total_hour;  ?> </td>
+                           <td> <?php echo number_format($total_income); ?></td>
                          </tr>
                        </tbody>
                      </table>
@@ -149,21 +160,5 @@
           var  total = start+'/'+end+'/';
           window.open("<?php echo $GLOBALS['DEFAUL_DOMAIN'] ?>teaching_details/trang_chu/"+total);
         }
-        
-    function tinh_tong_doanh_thu_va_gio(){
-      var array_doanh_thu = document.getElementsByClassName("doanh_thu");
-      var array_gio = document.getElementsByClassName("hours");
-      var tong_dt = 0; 
-      var tong_gio = 0;
-      for (let i = 0; i < array_doanh_thu.length; i++) {
-       tong_dt += parseInt(array_doanh_thu[i].innerHTML);
-      }
-      for (let j = 0; j < array_gio.length; j++) {
-       tong_gio += parseInt(array_gio[j].innerHTML);
-      }
-      tong_dt.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-      document.getElementById("total_dt").innerHTML = Intl.NumberFormat().format(tong_dt)+ " VNĐ";
-      document.getElementById("total_hour").innerHTML = Intl.NumberFormat().format(tong_gio) + " Giờ";
-    }
-  
+
   </script>

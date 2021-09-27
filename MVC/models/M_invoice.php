@@ -36,13 +36,56 @@ class M_invoice extends DB
         return $this->get_list_with_between('date',$start_date, $end_date);
     }
     function get_total_cost_invoice($start_date,$end_date){
-       
+       //@$start_date,$end_date dạng YYYY/MM/DD
        $array = $this->get_invoice_date_range($start_date,$end_date);
        $tong = 0;
        foreach ($array as  $value) {
           $tong+= $value['bill'];
         }
         return $tong;
+    }
+    function get_reinvest_cost($start_date,$end_date){
+        $array = $this->get_invoice_date_range($start_date,$end_date);
+        $totalReinvest = 0;
+        foreach ($array as $key => $value) {
+            if($value['type']==2){// get Reinvest cost
+                $totalReinvest+=$value['bill'];
+            }
+        }
+        return $totalReinvest;
+    }
+    function get_operation_cost($start_date,$end_date){
+        //@$start_date,$end_date dạng YYYY/MM/DD
+        $array = $this->get_invoice_date_range($start_date,$end_date);
+        $totalOperation = 0;
+        foreach ($array as $key => $value) {
+            if($value['type']==1){// get Operation cost
+                $totalOperation+=$value['bill'];
+            }
+        }
+        return $totalOperation;
+    }
+    function get_array_reinvest_cost_in_year(){
+        $this_month = date('n');
+        $arrayReinvestCost = array();
+        for ($m=1; $m<=$this_month; $m++) {
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            $arrayReinvestCost[] =  $this->get_reinvest_cost($start_date,$end_date);
+        }
+        return $arrayReinvestCost;   
+    }
+    function get_array_operation_cost_in_year(){
+        $this_month = date('n');
+        $arrayOperationCost = array();
+        for ($m=1; $m<=$this_month; $m++) {
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            $arrayOperationCost[] =  $this->get_operation_cost($start_date,$end_date);
+        }
+        return $arrayOperationCost;   
     }
 }
 

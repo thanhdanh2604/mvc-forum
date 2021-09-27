@@ -44,5 +44,16 @@ class M_staff_cost extends DB
         }
         return $tong;
     }
+    function get_array_total_staff_cost_year(){
+        $this_month = date('n');
+        $arrayStaffCost = array();
+        for ($m=1; $m<=$this_month; $m++) {
+            $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));
+            $start_date = date('Y-m-01',strtotime($month));
+            $end_date = date('Y-m-t',strtotime($month));
+            $arrayStaffCost[] =  $this->get_total_staff_cost($start_date,$end_date);
+        }
+        return $arrayStaffCost;   
+    }
 }
 ?>

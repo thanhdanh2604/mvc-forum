@@ -1,0 +1,34 @@
+.page{
+
+}
+.report_layout{
+  width: 1280px;
+}
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .header_img{
+  width: 20%;
+}
+.header .header_title{
+  width: 80%;
+}
+
+.header_title{
+  text-align: center;
+}
+.input_date,.content{
+  display: flex;
+  justify-content: center;
+}
+#page_left, #page_right {
+  margin: 10px;
+  width: 50%;
+}
+.warning{
+  color:rgb(219, 64, 64);
+  font-size:13px;
+}

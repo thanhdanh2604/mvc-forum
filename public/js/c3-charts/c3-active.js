@@ -1,37 +1,36 @@
 (function ($) {
- "use strict";
-    var array_dt = ['Chi phí doanh thu'];
-    var array_vp = ['Chi phí văn phòng'];
-    var array_ns = ['Chi phí nhân sự'];
-    var array_dt_tt = ['Doanh thu'];
-    var array_dt_days = [' Doanh thu trong ngày'];
+    "use strict";
+
+    var array_dt_tt = ['Revenue'];
+    var array_dt_gf = ['Gross profit'];
+    var array_dt_cf = ['Cash flow'];
+    var array_dt_days = ['Daily Revenue'];
     new Date();
     var array_x_dt_days = [];
     for (let i = 1; i <= 7; i++) {
-        var temp = new Date(Date.now() - i*24*60*60*1000);
-        array_x_dt_days.push( temp.toLocaleDateString('en-GB'));
+        var temp = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+        array_x_dt_days.push(temp.toLocaleDateString('en-GB'));
     }
     array_x_dt_days.reverse();
     array_x_dt_days.unshift('x');
-    var final_dt;
 
-    $.get( "./ajax/get_array_doanh_thu_7_ngay_gan_nhat", function( data ) {
-        var final_array_dt_days =  array_dt_days.concat(JSON.parse(data));
+    $.get("./ajax/get_array_doanh_thu_7_ngay_gan_nhat", function (data) {
+        var final_array_dt_days = array_dt_days.concat(JSON.parse(data));
         c3.generate({
             bindto: '#chart-day',
-            data:{
+            data: {
                 x: 'x',
                 columns: [
-                array_x_dt_days,
+                    array_x_dt_days,
                     final_array_dt_days
                 ],
-                colors:{
-                    ' Doanh thu trong ngày': '#006DF0',
+                colors: {
+                    ' Daily Revenue': '#006DF0',
                 },
                 type: 'spline',
                 labels: {
                     format: {
-                        "Doanh thu trong ngày": d3.format("$,")
+                        "Daily Revenue": d3.format("đ,")
                     }
                 },
             },
@@ -39,71 +38,81 @@
                 x: {
                     type: 'category'
                 },
-                y : {
+                y: {
                     tick: {
-                        format: d3.format("$,")
+                        format: d3.format("đ,")
                     }
                 }
             },
             grid: {
-            x: {
-                show: true
-            },
-            y: {
-                show: true
+                x: {
+                    show: true
+                },
+                y: {
+                    show: true
+                }
             }
-        }
         });
     });
-    $.get( "./ajax/get_array_doanh_thu_trong_nam", function( data ) {
-        final_dt =  array_dt.concat(JSON.parse(data));
+    $.get("./ajax/get_array_doanh_thu_trong_nam", function (data) {
+        var final_array_dt = array_dt_tt.concat(JSON.parse(data));
         c3.generate({
-            bindto: '#chart_dt',
-            data:{
+            bindto: '#chart_doanh_thu',
+            data: {
                 x: 'x',
                 columns: [
-                    ['x', 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De'],
-                    final_dt
+                    ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'De'],
+                    final_array_dt
                 ],
-                colors:{
-                    ' Chi phí doanh thu': '#006DF0',
+                colors: {
+                    'Revenue': '#6a9352',
                 },
                 type: 'bar',
                 labels: {
                     format: {
-                        "Chi phí doanh thu": d3.format("$,")
+                        "Revenue": d3.format(",.2r")
                     }
                 },
             },
             axis: {
                 x: {
                     type: 'category'
+
                 },
-                y : {
+                y: {
                     tick: {
-                        format: d3.format("$,")
-                    }
+                        format: d3.format(",.2r")
+                    },
+                    show: false
+                }
+            },
+            grid: {
+                x: {
+                    show: false
+                },
+                y: {
+                    show: true
                 }
             }
         });
     });
-    $.get( "./ajax/get_array_doanh_thu_thuc_te", function( data ) {
-        var final_array_dttt =  array_dt_tt.concat(JSON.parse(data));
+    $.get("./ajax/get_array_doanh_thu_thuc_te", function (data) {
+        var final_array_dttt = array_dt_gf.concat(JSON.parse(data));
         c3.generate({
             bindto: '#chart_dt_goc',
-            data:{
+            data: {
                 x: 'x',
                 columns: [
-                    ['x', 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De'],
+                    ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'De'],
                     final_array_dttt
                 ],
-                colors:{
-                    'Doanh thu': '#cb42f5',
+                colors: {
+                    'Gross profit': '#cb42f5',
                 },
                 type: 'bar',
                 labels: {
                     format: {
-                        "Doanh thu": d3.format("$,")
+                        "Gross profit": d3.format(",.2r"),
                     }
                 },
             },
@@ -111,77 +120,170 @@
                 x: {
                     type: 'category'
                 },
-                y : {
+                y: {
                     tick: {
-                        format: d3.format("$,")
+                        format: d3.format(",.2r"),
                     }
                 }
             },
         });
-        
+
+    });
+    // Cost flow
+    $.get("./ajax/ajax_get_array_chart_cost_flow", function (data) {
+        var final_array_cf = array_dt_cf.concat(JSON.parse(data));
+        c3.generate({
+            bindto: '#chart_cf',
+            data: {
+                x: 'x',
+                columns: [
+                    ['x', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'De'],
+                    final_array_cf
+                ],
+                colors: {
+                    'Cash flow': '#6a9352',
+                },
+                type: 'bar',
+                labels: {
+                    format: {
+                        "Cash flow": d3.format(",.2r")
+                    }
+                },
+            },
+            axis: {
+                x: {
+                    type: 'category'
+                },
+                y: {
+                    tick: {
+                        format: d3.format(",.2r")
+                    },
+                    show:false
+                }
+            },
+        });
+
     });
     // So sánh chi phí Văn Phòng và chi phí Nhân Sự
     c3.generate({
         data: {
             url: './ajax/get_chi_phi_vp_ns',
             mimeType: 'json',
-            colors:{
-                "Chi phí Văn Phòng": '#ff0000',
-                "Chi phí Nhân Sự": '#0000ff'
+            colors: {
+                "Operation Cost": '#ff0000',
+                "HRs Cost": '#0000ff'
             },
             labels: {
                 format: {
-                    "Chi phí Văn Phòng": d3.format("$,"),
-                    "Chi phí Nhân Sự": d3.format("$,")
+                    "Operation Cost": d3.format(",.2r"),
+                    "HRs Cost": d3.format(",.2r")
                 }
             },
-            
+
         },
-        types: {
-            "Chi phí Văn Phòng": 'line',
-            "Chi phí Nhân Sự": 'spline'
-        },
+        types: 'bar',
         bindto: '#chart_vp_ns',
         axis: {
             x: {
                 type: 'category',
-                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De']
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'De']
             },
-            y : {
+            y: {
                 tick: {
-                    format: d3.format("$,")
+                    format: d3.format(",.2r")
                 }
             }
-        },  
+        },
     });
+    // Đầu ra đầu vào
     c3.generate({
         data: {
             url: './ajax/get_array_dau_ra_dau_vao',
             mimeType: 'json',
             types: {
-                'Doanh thu đầu vào': 'bar',
-                'Tổng chi đầu ra': 'line'
+                'Revenue': 'bar',
+                'Cost': 'line'
             },
             labels: {
                 format: {
-                    "Doanh thu đầu vào": d3.format("$,"),
-                    "Tổng chi đầu ra": d3.format("$,")
+                    "Revenue": d3.format(",.2r"),
+                    "Cost": d3.format(",.2r")
                 }
             },
+            colors: {
+                Revenue: '#6a9352', // ADD
+                Cost: '#0000ff'
+            },
+            types: {
+                Revenue: 'bar', // ADD
+                Cost: 'line'
+            }
         },
         bindto: '#chart_dau_ra_dau_vao',
-        
+
         axis: {
             x: {
                 type: 'category',
-                categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De']
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'De']
             },
-            y : {
+            y: {
                 tick: {
-                    format: d3.format("$,")
-                }
+                    format: d3.format(",.2r")
+                },
+                show:false
             }
-        },  
-    })
-})(jQuery); 
-
+        },
+    });
+    // So sánh chi phí Văn Phòng và chi phí Nhân Sự
+    c3.generate({
+        data: {
+            url: './ajax/ajax_get_array_cost_year',
+            mimeType: 'json',
+            colors: {
+                "Operation": '#f00',
+                "Reinvest": '#00002f',
+                "Staff Cost": '#0000ff'
+            },
+            labels: {
+                format: {
+                    "Operation": d3.format(",.2r"),
+                    "Reinvest": d3.format(",.2r"),
+                    "Staff Cost": d3.format(",.2r")
+                },
+            },
+        },
+        types: 'line',
+        bindto: '#chart_cost',
+        axis: {
+            x: {
+                type: 'category',
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'De']
+            },
+            y: {
+                tick: {
+                    format: d3.format(",.2r")
+                },
+                show:false
+            }
+        },
+       
+    });
+    //Biểu đồ thống kê giờ dạy
+    c3.generate({
+        data: {
+            url: './ajax/ajax_get_array_teaching_hours',
+            mimeType: 'json',
+            // iris data from R
+            // columns: [
+            //     ['data1', 30],
+            //     ['data2', 120],
+            // ],
+            // colors: {
+            //     "data1": '#f00',
+            //     "data2": '#00002f'
+            // },
+            type : 'donut'
+        },
+        bindto: '#teaching_chart'
+    });
+})(jQuery);

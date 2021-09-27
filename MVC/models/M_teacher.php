@@ -1,14 +1,17 @@
 <?php
 
+
 class M_teacher extends DB
-{
-   
+{   
+    public $teaching_recording;
+    
     function __construct()
 	{
 		$this->table = 'teacher';
         $this->key_id = 'id_teacher';
         
     }
+
     function get_all_teacher(){
         return $this->get_list();
     }
@@ -43,6 +46,32 @@ class M_teacher extends DB
         }
         return $array;
     }
+    function chess_pass_teacher($username,$password){
+        $data_check = $this->get_list_with_condition('username',$username);
+        $status =false;
+        $message = '';
+        if($data_check==null){
+           return false;
+            exit;
+        }else{
+            if($password === $data_check[0]['pass_prof']){
+                $status = true;
+                return $object =array(
+                    'success'=> $status,
+                    'message'=> $message, 
+                    'id'=> $data_check[0]['id_teacher'],
+                    'name' => $data_check[0]['fullname'],
+                );
+            }else{
+                return false;
+                exit;
+            }
+        };
+    }
+    function get_infomation_via_name($username){
+        $this->get_list_with_condition('username',$username);
+    }
+    
 }
 
 ?>

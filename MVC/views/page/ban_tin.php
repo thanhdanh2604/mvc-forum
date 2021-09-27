@@ -18,7 +18,7 @@
                                 <div class="about-sparkline responsive-mg-b-30">
                                     <div class="sparkline-hd">
                                         <div class="main-spark-hd">
-                                            <h1>Doanh thu ngày hôm nay</h1>
+                                            <h1>Today Revenue</h1>
                                         </div>
                                     </div>
                                     <div class="counter">
@@ -33,7 +33,7 @@
                                 <div class="about-sparkline responsive-mg-b-30">
                                     <div class="sparkline-hd">
                                         <div class="main-spark-hd">
-                                            <h1>Doanh thu hôm qua</h1>
+                                            <h1>Yesterday Revenue</h1>
                                         </div>
                                     </div>
                                     <div class="sparkline-content">
@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <div class="analysis-progrebar">
-                                    <h3>Doanh thu theo ngày</h3>
+                                    <h3>Daily Revenue</h3>
                                     <div id="chart-day">
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                         <div class="sparkline-list">
                              <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1><span class="c3-ds-n">Lợi nhuận trước thuế ( Đã trừ chi phí VP + NS )</span></h1>
+                                    <h1><span class="c3-ds-n">Gross profit</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -83,11 +83,11 @@
                         <div class="sparkline7-list responsive-mg-b-30">
                             <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1><span class="c3-ds-n">Doanh thu chưa trừ chi phí</span></h1>
+                                    <h1><span class="c3-ds-n">Cash Flow</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
-                                <div id="chart_dt"></div>
+                                <div id="chart_cf"></div>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                         <div class="sparkline7-list responsive-mg-b-30">
                             <div class="sparkline7-hd">
                                 <div class="main-spark7-hd">
-                                    <h1><span class="c3-ds-n">Chi phí Văn Phòng và Nhân Sự</span></h1>
+                                    <h1><span class="c3-ds-n">Operation & HR Cost</span></h1>
                                 </div>
                             </div>
                             <div class="sparkline7-graph">
@@ -108,17 +108,15 @@
             </div>
         </div>
         <div class="row mg-tb-30">
-                    <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                           <div class="container white-box">
-                               <h4>Tổng chi đầu ra - Doanh thu đầu vào</h4>   
-                               <div id="chart_dau_ra_dau_vao"></div>
-                           </div>
-                       </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="container white-box">
+                            <h4>Revenue - Cost Chart</h4>   
+                            <div id="chart_dau_ra_dau_vao"></div>
+                        </div>
                     </div>
-                    
                 </div>
-       
+            </div>
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">

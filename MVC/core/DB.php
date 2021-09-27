@@ -161,10 +161,8 @@ class DB
            die ('Câu truy vấn bị sai');
        }
        $row = mysqli_fetch_assoc($result);
-
        // Xóa kết quả khỏi bộ nhớ
        mysqli_free_result($result);
-
        if ($row){
            return $row;
        }

@@ -12,7 +12,7 @@ class invoice extends controller {
     // chạy hàm mặc định
     public function trang_chu($month=null){
         if($month==null){
-            $month = strtotime('this month');
+            $month = strtotime('last month');// do HR, kế toán không nhập chi phí này liên tục hằng tháng nên bắt buộc phải đổi về tháng trước
         }
         $data = $this->model_invoice->get_all_invoice();
         $data_sc = $this->model_staff_cost->get_all_staff_cost();
@@ -40,6 +40,7 @@ class invoice extends controller {
         if(isset($_POST['submit_add_invoice'])){
                 $data = array(
                     'code_bill'=>$_POST['ma_hoa_don'],
+                    'type'=>$_POST['type'],
                     'info'=>$_POST['noi_dung'],
                     'date'=>$_POST['date'],
                     'bill'=> $_POST['bill'],

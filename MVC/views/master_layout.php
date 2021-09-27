@@ -16,7 +16,7 @@
     <!-- Start Left menu area -->
   <?php require_once 'block/left_sidebar.php'; ?>
   <!-- End Left menu area -->
- <?php  require_once 'block/header_bar.php'; ?>
+  <?php  require_once 'block/header_bar.php'; ?>
   <div class="all-content-wrapper">
       <?php
       // require page muốn hiển thị trong thư mục /page/, ví dụ là trang bản tin, hay trang tổng hợp teaching history của R&d
