@@ -109,9 +109,11 @@ class M_teaching_history extends DB
 		$number_of_date = date('t',strtotime($current_month));
 		$array_of_date = array();
 		for ($i=1; $i <= $number_of_date; $i++) { 
-			$time=mktime(12, 0, 0, $month, $i, $year);          
-    	if (date('m', $time)==$month)       
-      $array_of_date[]=date('d-m-Y', $time);
+			$time=mktime(12, 0, 0, (int)$month, $i, (int)$year);          
+    	if (date('m', $time)==$month){
+				$array_of_date[]=date('d-m-Y', $time);
+			}       
+      
 		}
 		// Lấy doanh thu từng ngày trong tháng
 		$array_revenue = array();

@@ -2,7 +2,7 @@
 <div class="report_layout">
     <div class="header">
           <div class="header_img">
-            <img style="width:100%" src="<?php  echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/img/logo-edu(trang).png" alt="Logo intertu">
+            <img src="<?php  echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/img/logo-edu(trang).png" alt="Logo intertu">
           </div>
           <div class="header_title">
             <h1>Business Monthly Report</h1>
@@ -12,14 +12,10 @@
       <!-- Input date  -->
         <div class="input_date">
           <div class="input_start_date">
-            <label for="">From</label>
-            <input type="date" id="start_date" name="start_date">
+            <label for="">Month</label>
+            <input value="<?php echo $data['year'].'-'.$data['month'] ?>" type="month" id="change_month" name="month">
+            <input type="submit" id="submit_button" value="Duyệt">
           </div>
-          <div class="input_end_date">
-          <label for="">To</label>
-            <input type="date" id="end_date" name="end_date">
-          </div>
-          
         </div>
       <!-- End input date -->
         <div class="content">
@@ -46,7 +42,7 @@
                   $total_cf+=$cash_flow->so_tien;
                 } ?>
                 <tr>
-                  <td colspan="2">Tổng</td>
+                  <td colspan="2">Total</td>
                   <td id="total_amount_cf" colspan="2"><?php echo number_format($total_cf); ?></td>
                 </tr>
               </tbody>
@@ -63,18 +59,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php $stt=0; $totalRevenue=0; foreach ($data['data_revenue_month'] as $key=>$value) { ?>
+                  <?php $stt=1; $totalRevenue=0; foreach ($data['data_revenue_month'] as $key=>$value) { ?>
                     <tr>
                       <td><?php echo $stt; ?></td>
                       <td><?php echo $key; ?></td>
-                      <td><?php echo $value; $totalRevenue+=$value; ?></td>
+                      <td><?php echo number_format($value); $totalRevenue+=$value; ?></td>
                     </tr>
                   <?php $stt++; } ?>
-                    <tr>
-                      <td colspan=2>Total</td>
-                      <td><?php echo $totalRevenue; ?></td>
-                    </tr>
+                   
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan=2>Total</td>
+                    <td><?php echo number_format($totalRevenue); ?></td>
+                  </tr>
+                </tfoot>
               </table>
             <div id="chart_doanh_thu"></div>
             <h3>Cost</h3>
@@ -102,11 +101,14 @@
                   <td>HRs</td>
                   <td><?php echo $data['totalStaffCost'] ?></td>
                 </tr>
-                <tr>
-                  <td colspan=2>Total</td>
-                  <td><?php echo $data['totalOperation']+ $data['totalReinvest']+$data['totalStaffCost'] ?></td>
-                </tr>
+                
               </tbody>
+              <tfoot>
+                  <tr>
+                    <td colspan=2>Total</td>
+                    <td><?php echo number_format($data['totalOperation']+ $data['totalReinvest']+$data['totalStaffCost']) ?></td>
+                  </tr>
+              </tfoot>
             </table>
             <div id="chart_cost"></div>
           </div>
@@ -134,11 +136,14 @@
                       <td><?php echo $teaching_hours; $total_teaching_hours+=$teaching_hours ?></td>
                     </tr>
                  <?php } ?>
-                 <tr>
-                   <td colspan=2>Total</td>
-                   <td> <?php echo $total_teaching_hours ?></td>
-                 </tr>
+                 
                 </tbody>
+                <tfoot>
+                  <tr>
+                   <td colspan=2>Total</td>
+                   <td> <?php echo number_format($total_teaching_hours)  ?></td>
+                 </tr>
+                </tfoot>
               </table>
               
             </div>
@@ -149,4 +154,18 @@
         </div>
     </div>
 </div>
-    
+<script>
+document.getElementById('submit_button').addEventListener("click", send_link)
+function send_link(){
+  var value = document.querySelector('[type="month"]').value
+  var year = value.slice(0,4);
+  var month = value.slice(5,7);
+  if(window.location.hostname=='localhost'){
+    link ='http://localhost/mvc-summary/';
+  }else{
+    link ='https://'+window.location.hostname+'/';
+  }
+  var fulllink = link + 'report_monthly/trang_chu' +'/'+month+'/'+year
+  window.location.href= fulllink;
+}
+</script>

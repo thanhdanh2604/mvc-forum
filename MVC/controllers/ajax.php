@@ -140,8 +140,7 @@ class ajax extends controller{
   }
   function ajax_get_array_chart_cost_flow(){
     $data = $this->model_teaching_recording->get_all_cost_flow();
-
-    $array_cost_flow = array('Cash flow');
+    $array_cost_flow = array();
     $this_month = date('n');
     for ($m=1; $m<=$this_month; $m++) {
         $month = date('Y-F', mktime(0,0,0,$m, 1, date('Y')));

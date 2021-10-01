@@ -5,6 +5,12 @@
     var array_dt_gf = ['Gross profit'];
     var array_dt_cf = ['Cash flow'];
     var array_dt_days = ['Daily Revenue'];
+    var hostname
+    if(window.location.hostname=='localhost'){
+        hostname ='http://localhost/mvc-summary';
+    }else{
+         hostname ='https://'+window.location.hostname;
+    }
     new Date();
     var array_x_dt_days = [];
     for (let i = 1; i <= 7; i++) {
@@ -14,7 +20,7 @@
     array_x_dt_days.reverse();
     array_x_dt_days.unshift('x');
 
-    $.get("./ajax/get_array_doanh_thu_7_ngay_gan_nhat", function (data) {
+    $.get(hostname+"/ajax/get_array_doanh_thu_7_ngay_gan_nhat", function (data) {
         var final_array_dt_days = array_dt_days.concat(JSON.parse(data));
         c3.generate({
             bindto: '#chart-day',
@@ -54,7 +60,7 @@
             }
         });
     });
-    $.get("./ajax/get_array_doanh_thu_trong_nam", function (data) {
+    $.get(hostname+"/ajax/get_array_doanh_thu_trong_nam", function (data) {
         var final_array_dt = array_dt_tt.concat(JSON.parse(data));
         c3.generate({
             bindto: '#chart_doanh_thu',
@@ -70,7 +76,7 @@
                 type: 'bar',
                 labels: {
                     format: {
-                        "Revenue": d3.format(",.2r")
+                        "Revenue": d3.format(",")
                     }
                 },
             },
@@ -81,7 +87,7 @@
                 },
                 y: {
                     tick: {
-                        format: d3.format(",.2r")
+                        format: d3.format(",")
                     },
                     show: false
                 }
@@ -96,7 +102,7 @@
             }
         });
     });
-    $.get("./ajax/get_array_doanh_thu_thuc_te", function (data) {
+    $.get(hostname+"/ajax/get_array_doanh_thu_thuc_te", function (data) {
         var final_array_dttt = array_dt_gf.concat(JSON.parse(data));
         c3.generate({
             bindto: '#chart_dt_goc',
@@ -112,7 +118,7 @@
                 type: 'bar',
                 labels: {
                     format: {
-                        "Gross profit": d3.format(",.2r"),
+                        "Gross profit": d3.format(","),
                     }
                 },
             },
@@ -122,7 +128,7 @@
                 },
                 y: {
                     tick: {
-                        format: d3.format(",.2r"),
+                        format: d3.format(","),
                     }
                 }
             },
@@ -130,7 +136,7 @@
 
     });
     // Cost flow
-    $.get("./ajax/ajax_get_array_chart_cost_flow", function (data) {
+    $.get(hostname+"/ajax/ajax_get_array_chart_cost_flow", function (data) {
         var final_array_cf = array_dt_cf.concat(JSON.parse(data));
         c3.generate({
             bindto: '#chart_cf',
@@ -146,7 +152,7 @@
                 type: 'bar',
                 labels: {
                     format: {
-                        "Cash flow": d3.format(",.2r")
+                        "Cash flow": d3.format(",")
                     }
                 },
             },
@@ -156,7 +162,7 @@
                 },
                 y: {
                     tick: {
-                        format: d3.format(",.2r")
+                        format: d3.format(",")
                     },
                     show:false
                 }
@@ -167,7 +173,7 @@
     // So sánh chi phí Văn Phòng và chi phí Nhân Sự
     c3.generate({
         data: {
-            url: './ajax/get_chi_phi_vp_ns',
+            url: hostname+'/ajax/get_chi_phi_vp_ns',
             mimeType: 'json',
             colors: {
                 "Operation Cost": '#ff0000',
@@ -175,8 +181,8 @@
             },
             labels: {
                 format: {
-                    "Operation Cost": d3.format(",.2r"),
-                    "HRs Cost": d3.format(",.2r")
+                    "Operation Cost": d3.format(","),
+                    "HRs Cost": d3.format(",")
                 }
             },
 
@@ -190,7 +196,7 @@
             },
             y: {
                 tick: {
-                    format: d3.format(",.2r")
+                    format: d3.format(",")
                 }
             }
         },
@@ -198,7 +204,7 @@
     // Đầu ra đầu vào
     c3.generate({
         data: {
-            url: './ajax/get_array_dau_ra_dau_vao',
+            url: hostname+'/ajax/get_array_dau_ra_dau_vao',
             mimeType: 'json',
             types: {
                 'Revenue': 'bar',
@@ -206,8 +212,8 @@
             },
             labels: {
                 format: {
-                    "Revenue": d3.format(",.2r"),
-                    "Cost": d3.format(",.2r")
+                    "Revenue": d3.format(","),
+                    "Cost": d3.format(",")
                 }
             },
             colors: {
@@ -228,7 +234,7 @@
             },
             y: {
                 tick: {
-                    format: d3.format(",.2r")
+                    format: d3.format(",")
                 },
                 show:false
             }
@@ -237,7 +243,7 @@
     // So sánh chi phí Văn Phòng và chi phí Nhân Sự
     c3.generate({
         data: {
-            url: './ajax/ajax_get_array_cost_year',
+            url: hostname+'/ajax/ajax_get_array_cost_year',
             mimeType: 'json',
             colors: {
                 "Operation": '#f00',
@@ -246,9 +252,9 @@
             },
             labels: {
                 format: {
-                    "Operation": d3.format(",.2r"),
-                    "Reinvest": d3.format(",.2r"),
-                    "Staff Cost": d3.format(",.2r")
+                    "Operation": d3.format(","),
+                    "Reinvest": d3.format(","),
+                    "Staff Cost": d3.format(",")
                 },
             },
         },
@@ -261,7 +267,7 @@
             },
             y: {
                 tick: {
-                    format: d3.format(",.2r")
+                    format: d3.format(",")
                 },
                 show:false
             }
@@ -271,17 +277,9 @@
     //Biểu đồ thống kê giờ dạy
     c3.generate({
         data: {
-            url: './ajax/ajax_get_array_teaching_hours',
+            url: hostname+'/ajax/ajax_get_array_teaching_hours',
             mimeType: 'json',
-            // iris data from R
-            // columns: [
-            //     ['data1', 30],
-            //     ['data2', 120],
-            // ],
-            // colors: {
-            //     "data1": '#f00',
-            //     "data2": '#00002f'
-            // },
+          
             type : 'donut'
         },
         bindto: '#teaching_chart'

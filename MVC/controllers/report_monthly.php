@@ -12,11 +12,11 @@ class report_monthly extends controller{
   }
 
   public function trang_chu($month=null,$year=null){
-    if($month==null||$year ==null){
+    if($month===null&&$year ===null){
       $month = date('m');
       $year = date('Y');
-      $amount_of_month = date('t',strtotime('01-'.$month.'-'.$year));
     }
+    $amount_of_month = date('t',strtotime('01-'.$month.'-'.$year));
     $start_date = date("Y-m-d", strtotime('01-'.$month.'-'.$year));
     $end_date = date("Y-m-d", strtotime($amount_of_month.'-'.$month.'-'.$year))
     ;
@@ -41,20 +41,22 @@ class report_monthly extends controller{
       'totalOperation'=> $totalOperation,
       'totalStaffCost'=> $totalStaffCost,
       'teaching_hours'=> $teaching_time,
+      'month'=>$month,
+      'year'=>$year,
       'start_date' =>$start_date,
       'end_date'=> $end_date
     ]);
   }
-  public function test(){
-    $month = date('m');
-    $year = date('Y');
-    $amount_of_month = date('t',strtotime('01-'.$month.'-'.$year));
-    $start_date = date("Y-m-d", strtotime('01-'.$month.'-'.$year));
-    $end_date = date("Y-m-d", strtotime($amount_of_month.'-'.$month.'-'.$year))
-    ;
-    $array_teacher =  $this->model_teaching_history->get_all_teaching_hours_teacher($start_date,$end_date);
-    print_r ($array_teacher);
-     
+  public function test($abc){
+    // $month = date('m');
+    // $year = date('Y');
+    // $amount_of_month = date('t',strtotime('01-'.$month.'-'.$year));
+    // $start_date = date("Y-m-d", strtotime('01-'.$month.'-'.$year));
+    // $end_date = date("Y-m-d", strtotime($amount_of_month.'-'.$month.'-'.$year))
+    // ;
+    // $array_teacher =  $this->model_teaching_history->get_all_teaching_hours_teacher($start_date,$end_date);
+    // print_r ($array_teacher);
+     echo $abc;
     
   }
 }
