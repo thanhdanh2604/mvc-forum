@@ -1,4 +1,4 @@
-
+<div class="btn-export" onclick=CreatePDFfromHTML()>Export Report</div>
 <div class="report_layout">
     <div class="header">
           <div class="header_img">
@@ -89,17 +89,17 @@
                 <tr>
                   <td>1</td>
                   <td>Operation</td>
-                  <td><?php echo $data['totalOperation'] ?></td>
+                  <td><?php echo number_format($data['totalOperation']); ?></td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Re-invest</td>
-                  <td><?php echo $data['totalReinvest'] ?></td>
+                  <td><?php echo number_format($data['totalReinvest']) ?></td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>HRs</td>
-                  <td><?php echo $data['totalStaffCost'] ?></td>
+                  <td><?php echo number_format($data['totalStaffCost']) ?></td>
                 </tr>
                 
               </tbody>
@@ -129,19 +129,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php $stt=1; $total_teaching_hours=0; foreach ($data['teaching_hours'] as $key => $teaching_hours) { ?>
+                  <?php $stt=1; $total_teaching_hours=0; foreach ($data['teaching_hours'] as $key => $teaching_hours) { 
+                    if($teaching_hours!=0){?>
                     <tr>
                       <td><?php echo $stt; $stt++ ?></td>
                       <td><?php echo $key ?></td>
                       <td><?php echo $teaching_hours; $total_teaching_hours+=$teaching_hours ?></td>
                     </tr>
-                 <?php } ?>
+                 <?php } } ?>
                  
                 </tbody>
                 <tfoot>
                   <tr>
                    <td colspan=2>Total</td>
-                   <td> <?php echo number_format($total_teaching_hours)  ?></td>
+                   <td > <?php echo number_format($total_teaching_hours)  ?></td>
                  </tr>
                 </tfoot>
               </table>
@@ -154,6 +155,7 @@
         </div>
     </div>
 </div>
+
 <script>
 document.getElementById('submit_button').addEventListener("click", send_link)
 function send_link(){
@@ -168,4 +170,30 @@ function send_link(){
   var fulllink = link + 'report_monthly/trang_chu' +'/'+month+'/'+year
   window.location.href= fulllink;
 }
+//Create PDf from HTML...
+function CreatePDFfromHTML() {
+    var HTML_Width = $(".report_layout").width();
+    var HTML_Height = $(".report_layout").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width + (top_left_margin * 2);
+    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+    html2canvas($(".report_layout")[0]).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+        for (var i = 1; i <= totalPDFPages; i++) { 
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        pdf.save("intertu-monthly-report-<?php echo $data['month'].'-'.$data['year'] ?>.pdf");
+        //$(".report_layout").hide();
+    });
+}
+
 </script>
+

@@ -136,7 +136,7 @@ class M_teaching_history extends DB
 				}
 			}
 		}
-		return $tong_doanh_thu;
+		return round($tong_doanh_thu,0);
 	}
 	//Lấy tổng hợp giờ dạy của Team R&D xuất theo dạng Mảng
 	function get_summary_team_rad($start_date,$end_date){
@@ -189,7 +189,6 @@ class M_teaching_history extends DB
 												$value3->time = $key3;
 												array_push($array_sun,$value3);
 												break;
-														 
 											default: 
 											break;
 										}
@@ -200,8 +199,6 @@ class M_teaching_history extends DB
 						}
 					}
 				}
-				
-			   
 			}
 		}
 		return $details = array_merge($this->sapxeptimeline($array_mon),$this->sapxeptimeline($array_tue),$this->sapxeptimeline($array_web),$this->sapxeptimeline($array_thu),$this->sapxeptimeline($array_fri),$this->sapxeptimeline($array_sat),$this->sapxeptimeline($array_sun));
@@ -388,6 +385,49 @@ class M_teaching_history extends DB
 			
 		}
 		return $array_cash_flow;
+	}
+	// Tạo Json hiển thị lịch dạy của team R&D trên calendar (Summary)
+	function get_json_calendar_r_d(){
+		$this->teacher = new M_teacher();
+		$array_r_d = $this->teacher->get_rd_teacher();
+    $array_color = array();
+		$final_array = array();
+		$data = $this->get_full_teaching_recording();
+    // Tạo mã màu ngẫu nhiên
+    $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+    for ($i=0; $i < count($array_r_d); $i++) { 
+      //set Color cho từng giáo viên
+      $array_r_d[$i]['color'] = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+    }
+		// Tạo Json calendar
+		foreach ($data as $key ) {
+			if ($key['teaching_history']!="") {
+				$data1 = json_decode($key['teaching_history']);
+				if($data1 ===null){
+					continue;
+				}else{
+					foreach ($data1 as $key1 => $value1) {
+						if($this->teacher->is_r_a_d($value1->ma_giao_vien)){
+							$found_key = array_search($value1->ma_giao_vien, array_column($array_r_d, 'id'));
+							$tengiaovien = $array_r_d[$found_key]['name'];
+							foreach ($value1->lich_hoc_du_kien as $key2 => $value2) {
+								foreach ($value2 as $date => $detail_date) {
+									$start_hour = isset($detail_date->starttime)?$detail_date->starttime:'';
+									$end_hour = isset($detail_date->endtime)?$detail_date->endtime:'';
+									$temp_obj = new stdClass;
+									$temp_obj->title=$tengiaovien;
+									$temp_obj->start=Date('Y-m-d',$date).'T'.$start_hour.':00';
+									$temp_obj->end=Date('Y-m-d',$date).'T'.$end_hour.':00';
+									$temp_obj->color=$array_r_d[$found_key]['color'];
+									$final_array[]=$temp_obj;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		echo json_encode($final_array);
 	}
 }
 

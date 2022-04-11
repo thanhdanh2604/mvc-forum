@@ -1,4 +1,5 @@
 
+
     <!-- jquery
 		============================================ -->
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/vendor/jquery-1.12.4.min.js"></script>
@@ -27,6 +28,7 @@
 		============================================ -->
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/scrollbar/mCustomScrollbar-active.js"></script>
+    
     <!-- metisMenu JS
 		============================================ -->
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/metisMenu/metisMenu.min.js"></script>
@@ -53,6 +55,13 @@
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/editable/bootstrap-datetimepicker.js"></script>
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/editable/bootstrap-editable.js"></script>
     <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/editable/xediable-active.js"></script>
+    
+    <!--Calendar JS====================================== -->
+    <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/calendar/moment.min.js"></script>
+    <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/calendar/fullcalendar.min.js"></script>
+    <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/calendar/fullcalendar-active.js"></script>
+   
+
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -65,3 +74,6 @@
             );
         } );
     </script>
+        
+    
+    

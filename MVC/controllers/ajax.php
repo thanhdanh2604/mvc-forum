@@ -168,6 +168,7 @@ class ajax extends controller{
   }
   function ajax_get_all_rad_teaching_detail(){
       $data = $this->model_teaching_recording->get_full_teaching_recording();
+  
       $array_teaching_rad = array();
       foreach ($data as $key ) {
         if ($key['teaching_history']!="") {
@@ -315,12 +316,11 @@ class ajax extends controller{
     }';
     echo $final_object;
   }
-  function ajax_get_array_teaching_hours($start_date=null,$end_date=null){
-    if($start_date == null||$end_date == null){ // Nếu không set thì gán ngày đầu và cuối tháng này
-	
-      $start_date = date('Y-m-01',strtotime('this month'));
-      $end_date = date('Y-m-t',strtotime('this month'));
-		}
+  function ajax_get_array_teaching_hours($month,$year){
+    $monthName = date("M", mktime(0, 0, 0, $month));
+    
+    $start_date = date('Y-m-01', strtotime($monthName.'-'.$year));;
+    $end_date =  date('Y-m-t', strtotime($monthName.'-'.$year));
     $data = $this->model_teaching_recording->get_all_teaching_hours_teacher($start_date,$end_date);
     $string_json = '';
     $count_array = count($data);
@@ -337,26 +337,12 @@ class ajax extends controller{
     $final_object = "{".$string_json."}";
     echo $final_object;
   }
-  function test(){
-    $data = $this->model_teaching_recording->get_all_cost_flow();
-    $sum_cost_of_the_month = 0;
-    
-    foreach($data as $costs ){
-      if($costs!=''){
-        foreach($costs as $detail_cost){
-          $ngay_nhan = strtotime($detail_cost->ngay_nhan);
-          echo $detail_cost->ngay_nhan;
-          // if($ngay_nhan>= $start_date && $ngay_nhan <=$end_date){
-          //   echo $detail_cost->so_tien;
-          // }
-          //echo $detail_cost->so_tien.":".$detail_cost->ngay_nhan."<br>";
-        }
-      }else{
-        continue;
-      }
-      
-    }
-    echo $sum_cost_of_the_month;
+  function ajax_events_calendar(){
+   $this->model_teaching_recording->get_json_calendar_r_d();
+  }
+  function ajax_get_list_date_range($start_date,$end_date){
+    $data = $this->model_teaching_recording->get_list_date_range($start_date,$end_date);
+    var_dump($data);
   }
 }
 

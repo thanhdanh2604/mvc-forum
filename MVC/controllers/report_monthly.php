@@ -29,9 +29,11 @@ class report_monthly extends controller{
     $totalOperation = $this->model_invoice->get_operation_cost($start_date,$end_date);
     $totalStaffCost = $this->model_staff_cost->get_total_staff_cost($start_date,$end_date);
     // Lấy giờ dạy của giáo viên trong tháng
-    $teaching_time = $this->model_teaching_history->get_all_teaching_hours_teacher($start_date,$end_date);
+    $data_teaching_time = $this->model_teaching_history->get_all_teaching_hours_teacher($start_date,$end_date);
+    arsort($data_teaching_time);
     // Lấy mảng bao gồm giáo viên
     $array_teacher =  $this->model_teacher->get_all_teacher();
+
     // Đổ ra View
     $this->view('report_layout',[
       'page'=>'monthly_report',
@@ -40,25 +42,14 @@ class report_monthly extends controller{
       'totalReinvest'=> $totalReinvest,
       'totalOperation'=> $totalOperation,
       'totalStaffCost'=> $totalStaffCost,
-      'teaching_hours'=> $teaching_time,
+      'teaching_hours'=> $data_teaching_time,
       'month'=>$month,
       'year'=>$year,
       'start_date' =>$start_date,
       'end_date'=> $end_date
     ]);
   }
-  public function test($abc){
-    // $month = date('m');
-    // $year = date('Y');
-    // $amount_of_month = date('t',strtotime('01-'.$month.'-'.$year));
-    // $start_date = date("Y-m-d", strtotime('01-'.$month.'-'.$year));
-    // $end_date = date("Y-m-d", strtotime($amount_of_month.'-'.$month.'-'.$year))
-    // ;
-    // $array_teacher =  $this->model_teaching_history->get_all_teaching_hours_teacher($start_date,$end_date);
-    // print_r ($array_teacher);
-     echo $abc;
-    
-  }
+ 
 }
 
 ?>

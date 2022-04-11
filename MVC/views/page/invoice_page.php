@@ -41,8 +41,12 @@
                                 <form action="<?php echo $GLOBALS['DEFAUL_DOMAIN']?>invoice/add_invoice" method="POST" role="form">
                                     <div class="form-group">
                                         <label>
-                                            <input name="type" type="checkbox" value="2">
-                                            Reinvest
+                                        
+                                            <select name="type" class="form-control" required="required">
+                                                <option value="1">Invoice</option>
+                                                <option value="2">Reinvest</option>
+                                            </select>
+                                            
                                         </label>
                                     </div>
                                     <div class="form-group">

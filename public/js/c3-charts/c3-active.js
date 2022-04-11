@@ -275,13 +275,5 @@
        
     });
     //Biểu đồ thống kê giờ dạy
-    c3.generate({
-        data: {
-            url: hostname+'/ajax/ajax_get_array_teaching_hours',
-            mimeType: 'json',
-          
-            type : 'donut'
-        },
-        bindto: '#teaching_chart'
-    });
+
 })(jQuery);

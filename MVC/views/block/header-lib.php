@@ -44,6 +44,7 @@
     <!-- calendar CSS
 		============================================ -->
     <link rel="stylesheet" href="<?PHP echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/css/calendar/fullcalendar.min.css">
+    
     <link rel="stylesheet" href="<?PHP echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/css/calendar/fullcalendar.print.min.css">
     <!-- Chart CSS
 		============================================ -->

@@ -14,6 +14,8 @@
 		============================================ -->
     <link rel="stylesheet" href="<?PHP echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/css/c3/c3.min.css">
     <link rel="stylesheet" href="<?PHP echo $GLOBALS['DEFAUL_DOMAIN']; ?>public/css/report-style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
   </head>
   <body>
     
@@ -30,6 +32,21 @@
   <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/c3-charts/d3.min.js"></script>
   <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/c3-charts/c3.min.js"></script>
   <script src="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>public/js/c3-charts/c3-active.js"></script>
-
+  <script>
+    if(window.location.hostname=='localhost'){
+        hostname ='http://localhost/mvc-summary';
+    }else{
+         hostname ='https://'+window.location.hostname;
+    }
+    c3.generate({
+        data: {
+            url: hostname+'/ajax/ajax_get_array_teaching_hours/<?php echo $data['month'].'/'.$data['year']; ?>',
+            mimeType: 'json',
+          
+            type : 'donut'
+        },
+        bindto: '#teaching_chart'
+    });
+  </script>
   </body>
 </html>

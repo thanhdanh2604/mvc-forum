@@ -1,6 +1,8 @@
 body{
   color:#1E4612;
   font-family: Roboto;
+  display: flex;
+    justify-content: center;
 }
 .input_start_date{
   margin-top:20px;
@@ -10,7 +12,7 @@ body{
 }
 .header h1{
   color: #F8E07D;
-  padding: 10px;
+  padding: 5px;
   background-color: #1E4612;
   display: inline-block;
   border-radius: 10px;
@@ -54,4 +56,18 @@ tfoot{
 div#page_right {
   border-left: 1px solid #1E4612;
   padding-left:5px;
+}
+.report_layout{
+  border:1px solid #1E4612;
+}
+.btn-export{
+  color: blue;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  position: absolute;
+  left: 45px;
+}
+.btn-export:hover{
+  cursor: pointer;
 }

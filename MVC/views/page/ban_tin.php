@@ -45,8 +45,11 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-                  
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <a class="btn btn-success mt-1" targer="__blank" href="./report_monthly">Bussiness Monthly Report </a>
+                    </div>
                   
                 </div>
             </div>

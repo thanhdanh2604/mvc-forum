@@ -138,6 +138,7 @@ class DB
        // Kết nối
         $this->connect_db();
         $sql = "SELECT * FROM ".$this->table." WHERE ".$this->key_id."=". $id;
+        echo $sql;
         $result = mysqli_query($this->__conn, $sql);
        if (!$result){
            die ('Câu truy vấn bị sai');
