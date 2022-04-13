@@ -52,7 +52,7 @@ class DB
     
         // Vì sau vòng lặp các biến $field_list và $value_list sẽ thừa một dấu , nên ta sẽ dùng hàm trim để xóa đi
         $sql = 'INSERT INTO '.$this->table. '('.trim($field_list, ',').') VALUES ('.trim($value_list, ',').')';
-    
+       
         return mysqli_query($this->__conn, $sql);
     }
      
@@ -65,7 +65,6 @@ class DB
         foreach ($data as $key => $value){
             $sql .= "$key = '". addslashes($value)."',";
         }
-    
         // Vì sau vòng lặp biến $sql sẽ thừa một dấu , nên ta sẽ dùng hàm trim để xóa đi
         $sql = 'UPDATE '.$this->table. ' SET '.trim($sql, ',').' WHERE '.$this->key_id.'='.$id;
        

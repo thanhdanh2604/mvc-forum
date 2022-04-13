@@ -5,7 +5,7 @@
     <div class="title_post">
       <label >Title</label>
       <input name="title" type="text" value="<?php echo $data["data_post"]['title'];?>">
-      <input type="text" name="id_user" value="<?php echo $data["data_post"]['id_user'];?>" id="">
+      <input name="id_post" type="text"  value="<?php echo $data["data_post"]['id_post'];?>">
     </div>
     <div class="info_post">
       <ul>

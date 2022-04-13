@@ -9,6 +9,7 @@
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
+  text-decoration: none;
 }
 .button:hover{
   cursor: pointer;
@@ -18,3 +19,40 @@
   background-color: #007bff;
   border-color: #007bff;
 }
+.button-red{
+  color: #fff;
+  background-color:red;
+}
+.button-green{
+  color: #fff;
+  background-color:green;
+}
+.button-yellow{
+  color: #fff;
+  background-color:green;
+}
+.table {
+  width:100%;
+  margin-bottom:1rem;
+  color:#212529
+ }
+ .table th,
+ .table td {
+  padding:.75rem;
+  vertical-align:top;
+  border-top:1px solid #dee2e6
+ }
+ .table thead th {
+  vertical-align:bottom;
+  border-bottom:2px solid #dee2e6
+ }
+ .table tbody+tbody {
+  border-top:2px solid #dee2e6
+ }
+ .table-sm th,
+ .table-sm td {
+  padding:.3rem
+ }
+ .table-bordered {
+  border:1px solid #dee2e6
+ }

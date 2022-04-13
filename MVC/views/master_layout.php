@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <?php require_once 'block/require_login.php'; ?>
+
     <!-- Start Left menu area -->
   <?php require_once 'block/left_sidebar.php'; ?>
   <!-- End Left menu area -->

@@ -7,7 +7,11 @@ class account extends controller
         $this->model_accounts = $this->model('M_account');
     }
     function home(){
-       
+      $array_users = $this->model_accounts->get_list_with_condition('permission',1);
+      $this->view('master_layout',[
+        "page"=>"all_user",
+        "data_users"=>$array_users
+      ]);
     }
 
     function create_account(){
@@ -25,9 +29,11 @@ class account extends controller
           'sex'=>$_POST['sex']
         );
         $this->model_accounts->edit_info_account($data,$_POST['id_user']);
+        header('location:'.$GLOBALS['DEFAUL_DOMAIN']."/account/");
     }
     function delete_account($id){
-        return $this->model_accounts->delete_account($id);
+        $this->model_accounts->delete_account($id);
+        header('location:'.$GLOBALS['DEFAUL_DOMAIN']."/account/");
     }
     function detail_account($id){
       $detail_data = $this->model_accounts->get_detail_account($id);

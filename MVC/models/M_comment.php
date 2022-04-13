@@ -10,9 +10,7 @@ class M_comment extends DB
     function get_all_comments(){
         return $this->get_list();
     }
-    function get_detail_comment($id){
-      return  $this->get_row($id);
-    }
+
     function insert_comment($data){
         return $this->insert($data);
     }
@@ -21,6 +19,9 @@ class M_comment extends DB
     }
     function delete_comment($id){
         return $this->remove($id);
+    }
+    function get_all_comments_in_post($id_post){
+        return $this->get_list_with_condition('id_post',$id_post);
     }
 }
 

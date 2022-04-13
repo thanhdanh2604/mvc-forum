@@ -11,6 +11,9 @@ class M_account extends DB{
     function get_all_users(){
         return $this->get_list();
     }
+    function get_all_general_account(){
+        return $this->get_list_with;
+    }
     function check_duplica_username($username){
         //nếu trùng trả về true, sai trả về false
         $result = $this->get_list_with_condition('email',$username);

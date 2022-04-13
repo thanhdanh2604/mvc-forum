@@ -1,23 +1,26 @@
 
 <div class="left-sidebar-pro">
     <nav id="sidebar" class="">
-        <div class="sidebar-header">
 
-        </div>
-        <div class="left-custom-menu-adp-wrap comment-scrollbar">
+        <div>
             <div style=" margin-left:10px; width:150px" class="">
                 
                 </div>
 
-                <nav class="sidebar-nav left-sidebar-menu-pro">
-                    <ul class="metismenu" id="menu1">
+                <nav >
+                    <ul >
                         <li>
                             <a href="<?php echo $GLOBALS['DEFAUL_DOMAIN']; ?>">
-                                    <span class="educate-icon educate-home icon-wrap"></span>
-                                    <span class="mini-click-non">Dashboard</span>
+                                 
+                                    <span >Dashboard</span>
+                            </a>
+                            
+                        </li>
+                        <li>
+                            <a href="<?php echo $GLOBALS['DEFAUL_DOMAIN']; ?>account">
+                                    <span >User management</span>
                             </a>
                         </li>
-
                     </ul>
                 </nav>
        
