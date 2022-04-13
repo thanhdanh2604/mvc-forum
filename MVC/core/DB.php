@@ -10,7 +10,7 @@ class DB
     protected $server = 'localhost';
     protected $username = 'root';
     protected $password = '';
-    protected $database = 'intertu_qlhv';
+    protected $database = 'mvc_forum';
     // Hàm Kết Nối
     function connect_db()
     {
@@ -138,7 +138,7 @@ class DB
        // Kết nối
         $this->connect_db();
         $sql = "SELECT * FROM ".$this->table." WHERE ".$this->key_id."=". $id;
-        echo $sql;
+       
         $result = mysqli_query($this->__conn, $sql);
        if (!$result){
            die ('Câu truy vấn bị sai');

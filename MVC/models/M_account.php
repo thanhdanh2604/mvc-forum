@@ -5,53 +5,48 @@ class M_account extends DB{
 
     function __construct()
     {
-        $this->table = 'quanly';
-		$this->key_id = 'id';
+        $this->table = 'users';
+		$this->key_id = 'id_user';
+    }
+    function get_all_users(){
+        return $this->get_list();
     }
     function check_duplica_username($username){
         //nếu trùng trả về true, sai trả về false
-        $result = $this->get_list_with_condition('username',$username);
+        $result = $this->get_list_with_condition('email',$username);
         if($result==null){
             return false;
         }else{
             return true;
         }
     }
-    function get_detail_acount($id){
+    function get_detail_account($id){
         if($this->get_row($id)){
             $this->status = true ; 
             return $this->get_row($id);
         }
     }
-    function create_account( $username,$pwd){
+    function create_account( $email,$pwd){
         $pwd_hashed = password_hash($pwd, PASSWORD_DEFAULT);
-        if($this->check_duplica_username($username)===true){
+        if($this->check_duplica_username($email)===true){
             die('Username bị trùng');
         }
         $data = array(
-            "username"=>$username,
+            "email"=>$email,
             "password"=>$pwd_hashed
         );
        return $this->insert($data);
-    }
-    function reset_password($username,$password,$new_password){
-        // Kiểm tra username và password trước
-        if($this->check_pass($username,$password)){
-            $this->update(array('password'=>$new_password), $id);
-        }else{
-            echo "False";
-        };
     }
     function check_permission_with_id($id){
         $data_permission =$this->get_colum_with_id($id,'permission');
         return $data_permission;
     }
-    function check_permission_with_username($username){
-        $data_permission = $this->get_list_with_condition('username',$username);
-        return $data_permission[0]['permission'];
+    function check_data_with_email($email){
+        $data_permission = $this->get_list_with_condition('email',$email);
+        return $data_permission[0];
     }
-    function check_pass($username,$password){
-        $data_check = $this->get_list_with_condition('username',$username);
+    function check_pass($email,$password){
+        $data_check = $this->get_list_with_condition('email',$email);
         if($data_check==null){
             return false;
         }else{
@@ -61,7 +56,9 @@ class M_account extends DB{
                 return false;
             }
         }
-       
+    }
+    function edit_info_account($data,$id){
+        return $this->update($data,$id);
     }
 }
 

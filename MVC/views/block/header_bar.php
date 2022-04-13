@@ -5,7 +5,19 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="header-top-wraper">
                                 <div class="row">
-                                    <div style="height:60px;background-color:blue"></div>
+                                    <div style="height:60px;border:1px solid">
+                             
+                                        <ul>
+                                            <?php if(!empty($_SESSION)){ ?>
+                                                <li><a href="<?php echo $GLOBALS['DEFAUL_DOMAIN'] ?>account/detail_account/<?php echo $_SESSION['id_user']?>">Account info</li>
+                                                <li><a href="<?php echo $GLOBALS['DEFAUL_DOMAIN'] ?>login/logout">Logout</a></li> 
+                                            <?php }else{ ?>
+                                                <li><a href="<?php echo $GLOBALS['DEFAUL_DOMAIN'] ?>login/">Login</a></li>
+                                            <?php } ?>
+                                            
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
