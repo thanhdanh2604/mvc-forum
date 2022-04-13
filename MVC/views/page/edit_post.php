@@ -12,8 +12,8 @@
           <li>User:<?php echo $data["data_post"]['id_user'] ?></li>
           <li>Create Date:<?php echo $data["data_post"]['create_date'] ?></li>
           <li>Status:
-                <label >Public<input type="radio" name="public" <?php echo ($data["data_post"]['public']==1)?"checked=checked":'' ?> id=""></label>
-                <label >Only member<input type="radio" name="public" <?php echo ($data["data_post"]['public']==0)?"checked=checked":'' ?> id=""></label>
+                <label >Public<input value="1" type="radio" name="public" <?php echo ($data["data_post"]['public']==1)?"checked=checked":'' ?> id=""></label>
+                <label >Only member<input value="0" type="radio" name="public" <?php echo ($data["data_post"]['public']==0)?"checked=checked":'' ?> id=""></label>
           </li>
       </ul>
     </div>

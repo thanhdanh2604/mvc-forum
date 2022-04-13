@@ -68,7 +68,7 @@ class DB
     
         // Vì sau vòng lặp biến $sql sẽ thừa một dấu , nên ta sẽ dùng hàm trim để xóa đi
         $sql = 'UPDATE '.$this->table. ' SET '.trim($sql, ',').' WHERE '.$this->key_id.'='.$id;
-    
+       
         return mysqli_query($this->__conn, $sql);
     }
      

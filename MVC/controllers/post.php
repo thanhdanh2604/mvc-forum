@@ -48,11 +48,11 @@ class post extends controller
             'title'=>$_POST['title'],
             'id_user'=>$_POST['id_user'],
             'body'=>$_POST['body'],
-            'public'=>$_POST['public'],
+            'public'=>$_POST['public']
         );
         $this->model_posts->edit_post($data,$_POST['id_user']);
       }
-      header('location:'.$GLOBALS['DEFAUL_DOMAIN']);
+      // header('location:'.$GLOBALS['DEFAUL_DOMAIN']);
     }
     function delete_post($id){
       $this->model_posts->delete_post($id);
