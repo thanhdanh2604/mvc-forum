@@ -61,9 +61,12 @@
         </h3>
         <?php echo $comments["body"]; ?>
         <!-- Kiểm tra  -->
-        <?php if(isset($_SESSION["id_user"])&&$comments["id_user"]==$_SESSION["id_user"]){
+        <?php if((isset($_SESSION["permission"])&&$comments["id_user"]==$_SESSION["id_user"])){
           echo "<a class=\"button button-red\" href=\"".$GLOBALS['DEFAUL_DOMAIN']."comment/delete_comment/".$comments['id_comment']."/".$comments['id_post']."\">Delete your comment</a>";
         } ?>
+        <?php if(isset($_SESSION["permission"])&&$_SESSION["permission"]==99&&$comments['id_user']==0){?>
+          <a class="button button-red" href="<?php echo $GLOBALS['DEFAUL_DOMAIN'];?>comment/delete_comment/<?php echo $comments['id_comment']."/".$comments['id_post']?>">Delete your comment</a>
+        <?php } ?>
       </li>
       <?php } ?>
     </ul>

@@ -24,6 +24,7 @@ class login extends controller
             // Lấy thông tin lưu vào session
             $_SESSION['email'] = $email;
             $data_user = $this->account->check_data_with_email($email);
+            $_SESSION['name'] = $data_user['name'];
             $_SESSION['id_user'] = $data_user['id_user'];
             $_SESSION['permission'] = $data_user['permission'];
             header("location:".$GLOBALS['DEFAUL_DOMAIN']);
