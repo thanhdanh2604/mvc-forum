@@ -2,7 +2,7 @@
 Sửa thông tin kết nối database ở MVC/core/DB.php</br>
 Sửa link trang chủ biến $GLOBALS['DEFAUL_DOMAIN'] trong index.php</br>
 
-Tài khoản đăng nhập:
+Tài khoản đăng nhập:</br>
 <b>Tài khoản admin</b>
 <p>admin@gmail.com/12345</p>
 <b>Tài khoản general</b>
