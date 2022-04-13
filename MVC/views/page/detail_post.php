@@ -4,7 +4,7 @@
     <?php echo $data["data_post"]['title'] ?>
   </div>
   <div class="info_post">
-      info post, phần này sẽ để tên user, ngày post, thời gian, permission và status của post
+      
       <ul>
         <li>User:<?php echo $data["data_post"]['id_user'] ?></li>
         <li>Create Date:<?php echo $data["data_post"]['create_date'] ?></li>
