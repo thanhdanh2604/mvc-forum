@@ -1,4 +1,4 @@
-<form action="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>post/action_edit_post" method="post">
+<form action="<?PHP ECHO $GLOBALS['DEFAUL_DOMAIN'] ?>post/create_new_post" method="post">
   <div>
     <label >Title</label>
     <input required type="text" name="title" id="">
